@@ -1,0 +1,197 @@
+.jumbotron {
+    height:100vh;
+    background-image: url('../Images/lady.jpeg');
+    background-size: cover;
+}
+
+.jumbotron1 {
+    height: 100vh;
+    background-image: url("./Pictures3/map.png");
+    background-size: cover;
+    background-attachment: fixed;
+}
+.my-navbar{
+    background-color:black;
+    opacity: 0.5;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    color:black;
+}
+
+.container-dosbag{
+    margin-left:500px;
+}
+.login-page {
+    margin-top: 150px;
+}
+.container-how-to-use{
+    margin-left: 70px;
+    margin-top: 50px;
+}
+.container3{
+    margin-left: 200px;
+}
+.container4{
+    margin-left: 30px;
+    margin-top: 70px;
+    margin-bottom:70px;
+}
+.container-5{
+    border-radius: 20px;
+    margin-left:250px;
+    background-color:grey;
+    width:1000px;
+    height:200px;
+}
+.container6{
+    width:600px;
+    height:600px;
+    margin-left:450px;
+    margin-top:50px;
+}
+.container-7{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    height:600px;
+    width:100vw;
+    background-color: black;
+}
+.container-footer-homepage{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
+.inputfield{
+    background-color:transparent;
+}
+.form{
+    padding:30px;
+}
+.form1 {
+    margin-top: 140px;
+}
+.card1::before{
+    background:cyan;
+    content:"";
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    z-index:-1;
+    transition: all 0.6s ease;
+}
+.card1::before{
+    width:100%;
+    height:0;
+    transform: translate(-50%,-50%) rotate(45deg);
+}
+.card1:hover::before{
+    height: 400%;
+    border-radius:20px;
+}
+.card2::before{
+    background:brown;
+    content:"";
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    z-index:-1;
+    transition: all 0.6s ease;
+}
+.card2::before{
+    width:100%;
+    height:0;
+    transform:translate(-50%,-50%) rotate(-45deg)
+}
+.card2:hover:before{
+    height:400%;
+    border-radius:20px;
+}
+.welcome{
+    margin-top:170px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold; 
+}
+.lead{
+    border-radius:5px;
+    background-color: white;
+    opacity: 0.5;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+.body1{
+    background-color: black;
+    background-image: url("../Images/map.png")
+}
+.body2{
+    background-image: url("../Images/WhatsApp\ Image\ 2019-04-15\ at\ 13.50.56.jpeg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat:no-repeat;
+}
+
+.card {
+    max-width: 300px;
+    max-height: 500px;
+}
+
+.word{
+    margin-top:70px;
+}
+
+.parallax {
+    height: 40vw;
+    background-attachment: fixed;
+    background-image: url("../Images/luggage.jpeg");
+    background-position: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    display: flex;
+    align-items:center;
+}
+
+.example {
+    height : 200px;
+    width : 1000px;
+}
+
+.footer2{
+    height:20vw;
+    background-image: url('../Images/seat.jpeg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.user {
+    background-attachment:fixed;
+    background-repeat:no-repeat;
+    background-size:cover;
+    border-radius:100px;
+    width:160px;
+    height:160px;
+}
+
+.rating{
+ margin-top: 30px;
+ width:200px;
+ height:50px;
+}
+
+.title1{
+    margin-top:20px;
+}
+
+.errorstatement{
+    color : red;
+}

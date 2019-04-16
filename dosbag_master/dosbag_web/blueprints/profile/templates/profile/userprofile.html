@@ -1,0 +1,118 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Dosbag</title>
+</head>
+<body>
+    <!-- Navbar here -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="-webkit-text-fill-color: white">
+    <a class="navbar-brand" href="#">Dosbag</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://127.0.0.1:5000/seller">Marketplace</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Jumbotron here -->
+
+    <div id="jumbo" class="jumbotron jumbotron-fluid" style="background-image: url(https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/D8qa-2E/turquoise-lake-water-green-nature-background-resort-park_bdzizqio8__F0000.png); background-position: center">
+        <br>
+        <div class="container">
+            <h1 class="display-4" style="text-align: center; -webkit-text-fill-color: white">Profile</h1>
+            <p class="lead" style="text-align: center; -webkit-text-fill-color: white">Check your order history or make changes to your account</p>
+        </div>
+        <br>
+    </div>
+
+    <!-- Profile info -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <div class="profile-image" ><img src="{{profilepic}}"></div>
+            </div>
+            <div class="col-sm">
+                <h2 style="text-align: center">{{ username }}</h2>
+                <p style="text-align: center">{{ ic_name }}</p>
+                <p style="text-align: center">{{ handphone }}</p>
+                <br>
+            </div>
+            <div class="col-sm">
+                <form action = "{{ url_for('session.check') }}" method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <input type="hidden" name = "score" value ="5">
+                    <input type="hidden" name = "current" value ="{{int_id}}">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">5</button>
+                </form>
+            </div>
+            <div class="col-sm">
+                <form action = "{{ url_for('session.check') }}" method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <input type="hidden" name = "score" value ="4">
+                    <input type="hidden" name = "current" value ="{{int_id}}">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">4</button>
+                </form>
+            </div>
+            <div class="col-sm">
+                <form action = "{{ url_for('session.check') }}" method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <input type="hidden" name = "score" value ="3">
+                    <input type="hidden" name = "current" value ="{{int_id}}">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">3</button>
+                </form>
+            </div>
+            <div class="col-sm">
+                <form action = "{{ url_for('session.check') }}" method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <input type="hidden" name = "score" value ="2">
+                    <input type="hidden" name = "current" value ="{{int_id}}">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">2</button>
+                </form>
+            </div>
+            <div class="col-sm">
+                <form action = "{{ url_for('session.check') }}" method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <input type="hidden" name = "score" value ="1">
+                    <input type="hidden" name = "current" value ="{{int_id}}">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">1</button>
+                </form>
+            </div>
+
+        </div>
+        <hr>
+    </div>
+    <br>
+
+    <!-- Purchase History -->
+    <div class="container">
+        <h2>Purchase history</h2>
+        <ul class="list-group">
+            {%if purchase%}
+                {%for p in  purchase%}
+                <li class="list-group-item">{{p.username}}{{p.updated_at}}<em class="float-right" style="-webkit-text-fill-color: rgb(207, 207, 26)">Pending</em></li>
+                {%endfor%}
+            {%else%}
+                <p>This User's Purchase History Is Empty</p>
+            {%endif%}
+        </ul>
+    </div>
+
+</body>
+<hr>
+<footer class="lead" style="text-align: center">Created by Dosbag.inc </footer>
+<br>
+</html>

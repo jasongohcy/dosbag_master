@@ -1,0 +1,89 @@
+{% extends "_layout.html" %}
+{% block title %}
+  SignUp Page
+{% endblock %}
+{% block header %}
+{% endblock %}
+{% block content %}
+
+<body class="body2">
+
+    <nav class="navbar navbar-expand-lg navbar-body bg-body fixed-top">
+        <a class="navbar-brand text-white" href="#">Dosbag</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        
+            <div class="navbar-nav">
+            <a class="nav-item nav-link active text-white" href="#">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link text-white " href="#">MarketPlace</a>
+            <a class="nav-item nav-link text-white" href="#">Profile</a>
+            </div>
+
+            <div class="navbar-nav ml-auto login">
+                <a class="nav-item nav-link text-black" href="#">Login</a>
+            </div>
+
+        </div>
+    </nav>
+                <h1 class="word text-center text-white">Sign Up</h1>
+
+    <div class= 'error'>
+        {% for error in errors if errors %}
+            <p>{{error}}</p>
+        {% endfor %}
+    </div>
+    <div class="error"> 
+        {% if passworderror %}
+            <p>{{passworderror}}</p>
+        {%endif%}
+    </div>
+    <div class="container6">
+        <div class="container8">
+            <form class="form" action = "{{ url_for('user.create') }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <label class="text-white">Email</label>
+                <div class="form-group">
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email", name="email">
+                </div>
+                <label class="text-white">Username</label>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="username" placeholder="Username" name="username">
+                </div>
+                <label class="text-white">Password</label>
+                <div class="form-group">
+                <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                </div>
+                <label class="text-white">Age</label>
+                <div class="form-group">
+                <input type="text" class="form-control" id="age" placeholder="Age" name="age">
+                </div>
+                <label class="text-white">Home Address</label>
+                <div class="form-group">
+                <input type="text" class="form-control" id="homeadd" placeholder="home address" name="homeaddress">
+                </div>
+                <label class="text-white">Handphone Number</label>
+                <div class="form-group">
+                <input type="text" class="form-control" id="hpnum" placeholder="Handphone Number" name="handphone">
+                </div>
+                <label class="text-white">Identity Card Name</label>
+                <div class="form-group">
+                <input type="text" class="form-control" id="ic_name" placeholder="IC Name" name="ic_name">
+                </div>
+                <label class="text-white">Identity Card Number</label>
+                <div class="form-group">
+                <input type="text" class="form-control" id="ic_num" placeholder="IC Number" name = "ic_num">
+                </div>
+                <label class="text-white">Nationality</label>
+                <div class="form-group">
+                <input type="text" class="form-control" id="nationality" placeholder="Nationality" name="nationality">
+                </div>
+                <button type="submit" class="btn btn-info btn-block">Sign Up</button>
+            </form>
+        </div>
+    </div>    
+
+   
+
+{% endblock %}
