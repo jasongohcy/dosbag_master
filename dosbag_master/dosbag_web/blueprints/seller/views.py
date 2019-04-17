@@ -83,9 +83,10 @@ def buyer():
     seller = Seller.get(Seller.username == username)
     seller.buyer_id = current_user.id
     seller.sold = True
+    seller.amount = 50
     seller.save()
     # seller = (Seller.update({}))
-    return redirect(url_for('seller.seller'))
+    return redirect(url_for('braintree.new_checkout'))
 
 
     

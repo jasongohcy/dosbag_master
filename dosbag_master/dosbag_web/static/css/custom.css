@@ -1,3 +1,5 @@
+
+
 .jumbotron {
     height:100vh;
     background-image: url('../Images/lady.jpeg');
@@ -183,9 +185,9 @@
 }
 
 .rating{
- margin-top: 30px;
- width:200px;
- height:50px;
+    margin-top: 30px;
+    width:200px;
+    height:50px;
 }
 
 .title1{
@@ -195,3 +197,15 @@
 .errorstatement{
     color : red;
 }
+
+
+.profilepic{
+    width:200px;
+    border-radius: 10px;
+}
+
+.profilejumbo {
+    height: 280px;
+
+}
+

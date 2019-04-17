@@ -1,11 +1,10 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Dosbag</title>
-</head>
+{% extends "_layout.html" %}
+{% block title %}
+  Profile
+{% endblock %}
+{% block header %}
+{% endblock %}
+{% block content %}
 <body>
     <!-- Navbar here -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="-webkit-text-fill-color: white">
@@ -30,11 +29,11 @@
 
     <!-- Jumbotron here -->
 
-    <div id="jumbo" class="jumbotron jumbotron-fluid" style="background-image: url(https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/D8qa-2E/turquoise-lake-water-green-nature-background-resort-park_bdzizqio8__F0000.png); background-position: center">
+    <div id="jumbo" class="jumbotron jumbotron-fluid profilejumbo" style="background-image: url(https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/D8qa-2E/turquoise-lake-water-green-nature-background-resort-park_bdzizqio8__F0000.png); background-position: center">
         <br>
         <div class="container">
             <h1 class="display-4" style="text-align: center; -webkit-text-fill-color: white">Profile</h1>
-            <p class="lead" style="text-align: center; -webkit-text-fill-color: white">Check your order history or make changes to your account</p>
+            <p class="lead" style="text-align: center; -webkit-text-fill-color: black">Check your order history or make changes to your account</p>
         </div>
         <br>
     </div>
@@ -43,7 +42,8 @@
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <div class="profile-image" ><img src="{{current_user.profilepic}}"></div>
+    
+            <div ><img class ="profilepic" src="{{pic}}"></div>
             </div>
             <div class="col-sm">
                 <h2 style="text-align: center">{{ current_user.username }}</h2>
@@ -71,8 +71,27 @@
         <h2>Purchase history</h2>
         <ul class="list-group">
             {%if purchase%}
-                {%for p in  purchase%}
-                <li class="list-group-item">{{p.username}}{{p.updated_at}}<em class="float-right" style="-webkit-text-fill-color: rgb(207, 207, 26)">Pending</em></li>
+                {%for p in purchase%}
+                    <li class="list-group-item">{{p.username}}{{p.updated_at}}
+                    {% if p.seller_id.id in rated_ids %}
+                            <p>This User Has Been Rated By You</p>
+                    {%else%}
+                        <form class="form-inline" action="{{ url_for('profile.rate') }}" method="POST">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                            <input type="hidden" name="user_being_rated_id" value="{{p.seller_id}}"/>
+                            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Rate</label>
+                            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="rate">
+                            <option selected>Choose...</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            </select>
+                            <button type="submit" class="btn btn-outline-info">Submit</button>
+                        </form><em class="float-right" style="-webkit-text-fill-color: rgb(71, 207, 26)">Success</em></li>
+                    {%endif%}
+                    <p>Score : {{p.seller_id.average_rating}} </p>
                 {%endfor%}
             {%else%}
                 <p>Your Purchase History Is Empty</p>
@@ -84,4 +103,4 @@
 <hr>
 <footer class="lead" style="text-align: center">Created by Dosbag.inc </footer>
 <br>
-</html>
+{% endblock %}
