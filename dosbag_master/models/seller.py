@@ -12,5 +12,6 @@ class Seller(BaseModel):
     departure_location = pw.CharField()
     destination= pw.CharField()
     sold = pw.BooleanField(default=False)
-    transaction_completed = pw.BooleanField(default=False)
+    amount = pw.DecimalField(null=True)
+    # transaction_completed = pw.BooleanField(default=False)
 

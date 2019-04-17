@@ -1,6 +1,9 @@
 from models.base_model import BaseModel
 import peewee as pw
 from flask_login import UserMixin,current_user
+from playhouse.hybrid import hybrid_property
+from app import app
+
 
 
 
@@ -27,3 +30,14 @@ class User(BaseModel,UserMixin):
         
         return True
     
+    @hybrid_property
+    def profilepic_url(self):
+        return f"{app.config['S3_LOCATION']}{self.profilepic}"
+
+    @hybrid_property
+    def average_rating(self) :
+        from models.rate import Rate
+        return Rate.select(
+            pw.fn.ROUND(((pw.fn.SUM(Rate.score) / (pw.fn.COUNT(Rate.id) + 0.0))), 1).alias("average_score")
+            ).where(Rate.user_being_rated_id == self.id)[0].average_score
+        

@@ -16,7 +16,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{url_for('profile.profile')}}">Profile <span class="sr-only">(current)</span></a>
                 </li>
                
                 {%if current_user.username%}
@@ -53,20 +53,22 @@
     <div class="container">
         <br>
         <p class="lead">Enter flight information</p>
-        <form action = "{{ url_for('seller.check') }}" method="POST" >
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <form>
             <div class="row">
                 <div class="col-sm">
-                    <input type="text" class="form-control" name= 'flightcode' placeholder="eg. EK3464">
+                    <input type="plane_code" class="form-control" id="plane_code" placeholder="Enter plane code">
+                </div>
+                <div class="col-sm">
+                    <input type="text" class="form-control" name="time" placeholder="24hr format: 15:20:00" data-timepicker>
+                </div>
+                <div class="col-sm">
+                    <input type="date" class="form-control" id="date" placeholder="dd/mm/yy">
                 </div>
             </div>
             <br>
-                <button type="submit" class="btn btn-primary btn-sm">Sell</button>
+                <button type="submit" class="btn btn-primary btn-sm">Submit</button>
         </form>
         <br>
-        {%if error%}
-            <p>{{error}}</p>
-        {%endif%}
     </div>
 
     <!-- List-group of sells available -->
@@ -74,7 +76,7 @@
     <div class="container">
         <hr>
         <br>
-        <p class="lead">List of availability</p>
+        <p class="lead">All Sellers</p>
             <ul class="list-group">
                 {%for l in list_of_sellers%}
                 <form action = "{{ url_for('seller.buyer') }}" method="POST" >

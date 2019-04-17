@@ -1,0 +1,86 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Dosbag</title>
+</head>
+<body>
+    <!-- Navbar here -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary" style="-webkit-text-fill-color: white">
+    <a class="navbar-brand" href="#">Dosbag</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Marketplace</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sell</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Jumbotron here -->
+
+    <div id="jumbo" class="jumbotron jumbotron-fluid" style="background-image: url(https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/D8qa-2E/turquoise-lake-water-green-nature-background-resort-park_bdzizqio8__F0000.png); background-position: center">
+        <br>
+        <div class="container">
+            <h1 class="display-4" style="text-align: center; -webkit-text-fill-color: white">Profile</h1>
+            <p class="lead" style="text-align: center; -webkit-text-fill-color: white">Edit Your Profile</p>
+        </div>
+        <br>
+    </div>
+
+    <!-- Edit profile info form -->
+
+    <div class="container">
+        <br/>
+        <h1>Edit infomation</h1>
+        <br/>
+        <form action="{{ url_for('profile.editprofile') }}" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div class="form-group">
+                <label for='username'>Username: </label>
+                <input type='text' name='username' class="form-control" value="{{current_user.username}}">
+                <br>
+                {% for error in errors if errors %}
+                    <p style="text-align: center; -webkit-text-fill-color: rgb(213, 53, 53)">{{error}}</p>
+                {% endfor %}
+                <label for='email'>Email: </label>
+                <input type='text' name='email' class="form-control" value="{{current_user.email}}">
+                <br>
+                <label for='email'>Old Password: </label>
+                <input type='password' name='password' class="form-control">
+                {%if old_password_error%}
+                    <p style="text-align: center; -webkit-text-fill-color: rgb(213, 53, 53)">{{old_password_error}}</p>
+                {%endif%}
+                <br>
+                <label for='email'>New Password: </label>
+                <input type='password' name='new_password' class="form-control">
+                {%if passworderror%}
+                    <p style="text-align: center; -webkit-text-fill-color: rgb(213, 53, 53)">{{passworderror}}</p>
+                {%endif%}
+            </div>
+    
+            <br/>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+    </div>
+
+
+</body>
+<hr>
+<footer class="lead" style="text-align: center">Created by Dosbag.inc </footer>
+<br>
+</html>
