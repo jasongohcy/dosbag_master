@@ -1,79 +1,52 @@
 {% extends "_layout.html" %}
 {% block title %}
-  Profile
+  ProfilePage
 {% endblock %}
 {% block header %}
 {% endblock %}
 {% block content %}
-<body>
+
     <!-- Navbar here -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="-webkit-text-fill-color: white">
-    <a class="navbar-brand" href="#">Dosbag</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="http://127.0.0.1:5000/seller">Marketplace</a>
-                </li>
-            </ul>
+<div class="profile-body"></div>
+    <div class="container profile">
+        <div class="row test text-center">
+            <div class="our-team">
+                <div class="card test3" style="width: 18rem;">
+                    <img class="user-profile rounded-circle " src="{{pic}}" class="card-img-top" width="200px" height="200px">
+                    <div class="card-body profile-info">
+                        <h1 class="card-title">{{ current_user.username }}</h1>
+                        <p class="card-text">
+                            {{ current_user.ic_name }}
+                        </p>
+                        <p class="card-text">
+                            {{ current_user.handphone }}
+                        </p>
+                    </div>
+                    <div class="social">
+                        <form action="{{ url_for('profile.profilepic') }}" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                            <br><br>
+                            <input class="bg-white btn-block"type="file" name="user_file">
+                            <button class="btn btn-success btn-sm btn-block" type="submit">Upload</button>
+                        </form>
+                        <a type="submit" class="btn btn-primary btn-sm btn-block edit" href="{{url_for('profile.edit')}}">Edit Info</a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </nav>
-
-    <!-- Jumbotron here -->
-
-    <div id="jumbo" class="jumbotron jumbotron-fluid profilejumbo" style="background-image: url(https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/D8qa-2E/turquoise-lake-water-green-nature-background-resort-park_bdzizqio8__F0000.png); background-position: center">
-        <br>
-        <div class="container">
-            <h1 class="display-4" style="text-align: center; -webkit-text-fill-color: white">Profile</h1>
-            <p class="lead" style="text-align: center; -webkit-text-fill-color: black">Check your order history or make changes to your account</p>
-        </div>
-        <br>
     </div>
 
     <!-- Profile info -->
-    <div class="container">
-        <div class="row">
-            <div class="col-sm">
     
-            <div ><img class ="profilepic" src="{{pic}}"></div>
-            </div>
-            <div class="col-sm">
-                <h2 style="text-align: center">{{ current_user.username }}</h2>
-                <p style="text-align: center">{{ current_user.ic_name }}</p>
-                <p style="text-align: center">{{ current_user.handphone }}</p>
-                <div class="text-center">
-                    <form action="{{ url_for('profile.profilepic') }}" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-                        <br></br>
-                        <input type="file" name="user_file">
-                        <br></br>
-                        <button class="btn btn-success btn-sm" type="submit">Upload</button>
-                    </form>
-                    <button type="submit" class="btn btn-primary btn-sm">Edit Info</button>
-                </div>
-                <br>
-            </div>
-        </div>
-        <hr>
-    </div>
-    <br>
 
     <!-- Purchase History -->
-    <div class="container">
+    <div class="container ">
         <h2>Purchase history</h2>
-        <ul class="list-group">
+        <ul class="list-group purchase">
             {%if purchase%}
                 {%for p in purchase%}
-                    <li class="list-group-item">{{p.username}}{{p.updated_at}}
-                    {% if p.seller_id.id in rated_ids %}
+                    <li class="list-group-item ">Seller : {{p.username}}<br>Purchase Time : {{p.updated_at}}<br>
+                     {% if p.seller_id.id in rated_ids %}
                             <p>This User Has Been Rated By You</p>
                     {%else%}
                         <form class="form-inline" action="{{ url_for('profile.rate') }}" method="POST">
@@ -99,8 +72,10 @@
         </ul>
     </div>
 
-</body>
+
 <hr>
 <footer class="lead" style="text-align: center">Created by Dosbag.inc </footer>
 <br>
+
+
 {% endblock %}

@@ -35,8 +35,6 @@ def new_checkout():
     return render_template('braintree/new.html', client_token=client_token)
 
 
-
-
 @braintree_blueprint.route('/checkouts/result', methods=['POST'])
 def create_checkout():
     result = transact({

@@ -1,36 +1,12 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Dosbag</title>
-</head>
-<body>
+{% extends "_layout.html" %}
+{% block title %}
+  Seller page
+{% endblock %}
+{% block header %}
+{% endblock %}
+{% block content %}
     <!-- Navbar here -->
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary" style="-webkit-text-fill-color: white">
-    <a class="navbar-brand" href="#">Dosbag</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Marketplace</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Sell</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
+    
     <!-- Jumbotron here -->
 
     <div id="jumbo" class="jumbotron jumbotron-fluid" style="background-image: url(https://cdn-image.travelandleisure.com/sites/default/files/styles/1600x1000/public/checkedluggage0815.jpg?itok=2L4Jd-z3); background-position: center">
@@ -62,8 +38,8 @@
 
 <br>
 <br>
-</body>
+
 <hr>
 <footer class="lead" style="text-align: center">Created by Dosbag.inc </footer>
 <br>
-</html>
+{% endblock %}

@@ -1,9 +1,14 @@
+html,body{
+    width: 100%;
+}
 
-
-.jumbotron {
+.homepage{
     height:100vh;
+    width:100%;
     background-image: url('../Images/lady.jpeg');
     background-size: cover;
+    opacity:0.9;
+    text-align:center
 }
 
 .jumbotron1 {
@@ -19,7 +24,13 @@
     border-bottom-left-radius: 20px;
     color:black;
 }
-
+.container-text1{
+    margin-bottom: 50px;
+}
+.container-text2{
+    margin-top:50px;
+    margin-bottom: 50px;
+}
 .container-dosbag{
     margin-left:500px;
 }
@@ -27,16 +38,13 @@
     margin-top: 150px;
 }
 .container-how-to-use{
-    margin-left: 70px;
     margin-top: 50px;
 }
 .container3{
     margin-left: 200px;
 }
-.container4{
-    margin-left: 30px;
-    margin-top: 70px;
-    margin-bottom:70px;
+.container-4{
+    margin-bottom:50px;
 }
 .container-5{
     border-radius: 20px;
@@ -91,7 +99,7 @@
     transform: translate(-50%,-50%) rotate(45deg);
 }
 .card1:hover::before{
-    height: 400%;
+    height: 500%;
     border-radius:20px;
 }
 .card2::before{
@@ -112,7 +120,7 @@
     transform:translate(-50%,-50%) rotate(-45deg)
 }
 .card2:hover:before{
-    height:400%;
+    height:500%;
     border-radius:20px;
 }
 .welcome{
@@ -120,7 +128,7 @@
     font-family: 'Times New Roman', Times, serif;
     font-weight: bold; 
 }
-.lead{
+.lead-1{
     border-radius:5px;
     background-color: white;
     opacity: 0.5;
@@ -197,8 +205,6 @@
 .errorstatement{
     color : red;
 }
-
-
 .profilepic{
     width:200px;
     border-radius: 10px;
@@ -206,6 +212,61 @@
 
 .profilejumbo {
     height: 280px;
+}
+.button {
+    color:black;
+}
+.profile{
+    margin-top:-150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
 
+.our-team{
+    width:300px;
+    height: 400px;
+}
+
+.social{
+    width:100%;
+    height:200px;
+    background:royalblue;
+    position:absolute;
+    bottom: -500px;
+    left:0;
+    transition:all 0.5s ease 0s;
+}
+
+.our-team:hover .social{
+    bottom:0px;
+    border-radius:5px;
+}
+
+.profile-info{
+    
+    padding: 30px;
+}
+
+.user-profile{
+    margin-left:40px;
+    padding:20px;
+}
+
+.test3{
+    border:solid black 3px;
+    border-radius: 10px;
+    width:100%;
+}
+
+.profile-body{
+    background-color:royalblue;
+    background-size:cover;
+    height:300px;
+}
+
+.edit{
+    bottom:0;
 }
 
