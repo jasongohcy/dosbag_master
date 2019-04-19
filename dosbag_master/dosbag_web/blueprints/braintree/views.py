@@ -49,19 +49,6 @@ def create_checkout():
 
     if result.is_success or result.transaction:
         
-        # message = Mail(
-        #     from_email='chunghanwong99@gmail.com',
-        #     to_emails= current_email,
-        #     subject='Sending with SendGrid is Fun',
-        #     html_content=f"The amount of money transacted to NEXT Academy is $ {amount}. Please call your bank your if you are not aware of this payment. Have a great day!")
-        # try:
-        #     sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
-        #     response = sg.send(message)
-        #     print(response.status_code)
-        #     print(response.body)
-        #     print(response.headers)
-        # except Exception as e:
-        #     print(e.message)
         return redirect(url_for('braintree.show_checkout',transaction_id=result.transaction.id))
     else:
         for x in result.errors.deep_errors: flash('Error: %s: %s' % (x.code, x.message))

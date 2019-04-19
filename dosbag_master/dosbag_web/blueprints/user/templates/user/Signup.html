@@ -5,65 +5,77 @@
 {% block header %}
 {% endblock %}
 {% block content %}
-
-<body class="body2">
-
-   
-    <div class= 'error'>
-        {% for error in errors if errors %}
-            <p>{{error}}</p>
-        {% endfor %}
+<h1 style="text-align: center">Sign Up</h1>
+<div class="container-fluid">
+    <div class="col-md-12 border p-2 m-2">
+        <form class="form" action = "{{ url_for('user.create') }}" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                <label for="inputEmail4">Email</label>
+                <input type="email" class="form-control" id="email" name="email "placeholder="Email">
+                {%if emailerror%}
+                <p class="errorstatement">{{emailerror}}</p>
+                 {%endif%}
+                </div>
+                <div class="form-group col-md-4">
+                <label for="inputUsername4">Username</label>
+                <input type="username" name="username" class="form-control" id="username" placeholder="Username">
+                {% if usernameerror %}
+                    <p class="errorstatement">{{usernameerror}}</p>
+                {%endif%}
+                </div>
+                <div class="form-group col-md-4">
+                <label for="inputPassword4">Password</label>
+                <input type="password" name="password" class="form-control" id="inputPassword4" placeholder="Password">
+                {% if passworderror %}
+                <p class="errorstatement">{{passworderror}}</p>
+                    {%endif%}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">Address</label>
+                <input type="text" name="homeaddress" class="form-control" id="inputAddress" placeholder="1234 Main St">
+            </div>
+            <div class="form-group">
+                <label for="inputAddress2">Address 2</label>
+                <input type="text" name="homeaddress2" class="form-control" id="inputAddress2" placeholder="Postcode,City,State,Country">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                <label for="inputCity">Age</label>
+                <input type="text" name="age" class="form-control" id="inputAge">
+                </div>
+                <div class="form-group col-md-5">
+                <label for="inputNationality">Nationality</label>
+                <input type="text" name="nationality" class="form-control" id="inputNationality">
+                </div>
+                <div class="form-group col-md-5">
+                <label for="inputPhone number">Phone Number</label>
+                <input id="inputState" name="handphone" class="form-control"></input>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                <label for="inputICname">Identity Card Name</label>
+                <input type="text" name="ic_name" class="form-control" id="ic_name">
+                </div>
+                <div class="form-group col-md-6">
+                <label for="inputNationality">Nationality</label>
+                <input type="text" name="ic_num" class="form-control" id="ic_num">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck">
+                <label class="form-check-label" for="gridCheck">
+                    Check me out
+                </label>
+                </div>
+            </div>
+            <button type="submit-fluid" class="btn btn-primary">Sign in</button>
+        </form>
     </div>
-    <div class="error"> 
-        {% if passworderror %}
-            <p>{{passworderror}}</p>
-        {%endif%}
-    </div>
-    <div class="container6">
-        <div class="container8">
-            <form class="form" action = "{{ url_for('user.create') }}" method="POST">
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-                <label class="text-white">Email</label>
-                <div class="form-group">
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email", name="email">
-                </div>
-                <label class="text-white">Username</label>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="username" placeholder="Username" name="username">
-                </div>
-                <label class="text-white">Password</label>
-                <div class="form-group">
-                <input type="password" class="form-control" id="password" placeholder="Password" name="password">
-                </div>
-                <label class="text-white">Age</label>
-                <div class="form-group">
-                <input type="text" class="form-control" id="age" placeholder="Age" name="age">
-                </div>
-                <label class="text-white">Home Address</label>
-                <div class="form-group">
-                <input type="text" class="form-control" id="homeadd" placeholder="home address" name="homeaddress">
-                </div>
-                <label class="text-white">Handphone Number</label>
-                <div class="form-group">
-                <input type="text" class="form-control" id="hpnum" placeholder="Handphone Number" name="handphone">
-                </div>
-                <label class="text-white">Identity Card Name</label>
-                <div class="form-group">
-                <input type="text" class="form-control" id="ic_name" placeholder="IC Name" name="ic_name">
-                </div>
-                <label class="text-white">Identity Card Number</label>
-                <div class="form-group">
-                <input type="text" class="form-control" id="ic_num" placeholder="IC Number" name = "ic_num">
-                </div>
-                <label class="text-white">Nationality</label>
-                <div class="form-group">
-                <input type="text" class="form-control" id="nationality" placeholder="Nationality" name="nationality">
-                </div>
-                <button type="submit" class="btn btn-info btn-block">Sign Up</button>
-            </form>
-        </div>
-    </div>    
-
-   
+</div>
 
 {% endblock %}

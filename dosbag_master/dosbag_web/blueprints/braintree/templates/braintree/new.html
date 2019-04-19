@@ -1,23 +1,29 @@
-{% extends '_layout.html' %}
+{% extends "_layout.html" %}
+{% block title %}
+  Profile
+{% endblock %}
+{% block header %}
+{% endblock %}
 {% block content %}
 
-<div class="wrapper">
-  <div class="checkout container">
+<div class="wrapper" style="background-image: url(../../../../static/Images/payment_background.jpg); background-repeat:no-repeat; background-size: cover;" >
+  <div class="checkout container" >
 
-    <header>
-      <h1>Hi, <br>Let's test a transaction</h1>
-      <p class="privatestatement">
-        Make a test payment with Braintree using PayPal or a card
+    <div class="container">
+      </br>
+      <h1 style="-webkit-text-fill-color: white">Hi, {{current_user.username}}</h1>
+      <p style="-webkit-text-fill-color: white">
+        Make a payment with Braintree using a card
       </p>
-    </header>
-
+  </div>
+  <div class="container" style="background-color: white;"></div>
     <form id="payment-form" method="post" action="{{ url_for('braintree.create_checkout') }}">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         <section>
             <label for="amount">
             <span class="input-label">Amount</span>
             <div class="input-wrapper amount-wrapper">
-                <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="10">
+                <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="50" >
             </div>
             </label>
 
@@ -58,4 +64,5 @@
     });
   });
 </script>
+
 {% endblock %}

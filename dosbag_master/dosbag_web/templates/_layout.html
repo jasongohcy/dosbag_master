@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://loading.io/css/loading.css"/>
     {% assets "home_css" %}
     <link rel="stylesheet" href="{{ ASSET_URL }}">
     {% endassets %}
@@ -43,7 +44,7 @@
                     <a class="nav-link text-white" href="{{url_for('profile.profile')}}">Profile</a>
                   </li>
                   <li class="nav-item ">
-                      <a class="nav-link text-white" href="{{url_for('seller.seller')}}">MarketPlace</a>
+                      <a class="nav-link text-white" href="{{url_for('seller.availability')}}">MarketPlace</a>
                   </li>
                   <li class="nav-item ">
                     <a class="nav-link text-white" href="{{url_for('seller.sell')}}">Sell</a>
@@ -66,7 +67,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item ">
-                    <a class="nav-link text-white" href="{{url_for('seller.seller')}}">MarketPlace</a>
+                    <a class="nav-link text-white" href="{{url_for('seller.availability')}}">MarketPlace</a>
                 </li>
                 <li class="nav-item ">
                   <a class="nav-link text-white" href="{{url_for('seller.sell')}}">Sell</a>

@@ -20,7 +20,7 @@ def profile():
     purchase = Seller.select().where(Seller.buyer_id == current_user.id)
     rated = Rate.select().where(Rate.rater_id == current_user.id)
     rated_ids = [r.user_being_rated_id.id for r in rated]
-
+    everyone = User.select()
     # score = []
     # for r in rated :
     #     sum_score = Rate.select(fn.SUM('score')).where(Rate.user_being_rated_id == r.user_being_rated_id)

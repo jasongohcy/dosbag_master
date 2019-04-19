@@ -24,7 +24,7 @@ def check():
         if email == e.email :
             if check_password_hash(e.password, password) :
                 login_user(e)
-                return redirect(url_for('seller.seller'))
+                return redirect(url_for('seller.availability'))
             else:
                 return render_template('session/Login.html', passworderror = "Wrong Password")
     return render_template('sessions/Login.html', emailerror="Wrong Email")

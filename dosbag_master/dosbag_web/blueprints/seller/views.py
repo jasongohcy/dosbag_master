@@ -10,25 +10,37 @@ seller_blueprint = Blueprint('seller',
                             template_folder='templates')
 
 
+
+
+# @seller_blueprint.route('/', methods=['GET'])
+# def seller():
+#     # now = str(datetime.datetime.now())
+    
+#     # d = re.search('\d+-\d+-\d+', now)
+#     # if d :
+#     #     date = d.group(0)
+    
+#     # t = re.search('\d+:\d+:\d+', now)
+#     # if t :
+#     #     time = t.group(0)
+
+#     # list_of_sellers = Seller.select().where((Seller.departure_date >= date) & (Seller.sold != True))
+#     pass
+
+@seller_blueprint.route('/', methods=['GET' ,'POST'])
+def availability():
+    flightcode = request.form.get('flightcode')
+    time = request.form.get('time')
+    date = request.form.get('date')
+    available = Seller.select().where((Seller.flightcode==flightcode) & (Seller.departure_date==date) & (Seller.departure_time==time) & (Seller.sold ==False))
+    
+    return render_template('seller/marketplace.html', available=available)
+
+
+
 @seller_blueprint.route('/sell', methods=['GET'])
 def sell():
     return render_template('seller/seller.html')
-
-@seller_blueprint.route('/', methods=['GET'])
-def seller():
-    now = str(datetime.datetime.now())
-
-    d = re.search('\d+-\d+-\d+', now)
-    if d :
-        date = d.group(0)
-    
-    t = re.search('\d+:\d+:\d+', now)
-    if t :
-        time = t.group(0)
-
-    list_of_sellers = Seller.select().where((Seller.departure_date >= date) & (Seller.sold != True))
-    return render_template('seller/marketplace.html',list_of_sellers=list_of_sellers)
-
 
 @seller_blueprint.route('/check', methods=['POST'])
 def check():
@@ -52,7 +64,7 @@ def check():
                 destination = i['arrival']['iataCode']
                 return render_template('seller/confirm.html',time=time,date=date,flightcodes=flightcodes,departure_time=departure_time,departure_location=departure_location,destination=destination)
     else:
-        return render_template('seller/marketplace.html',error="No Existing Flight Code")
+        return render_template('seller/seller.html',error="No Existing Flight Code")
     
     
 
@@ -69,8 +81,8 @@ def post():
     destination = request.form.get('destination')
     username = current_user.username
     user_id = current_user.id
-    seller = Seller.create(username=username, seller_id = user_id, flightcode=flightcode, departure_time=departure_time,departure_date=departure_date,departure_location=departure_location,destination=destination)
-    return redirect(url_for('seller.seller'))
+    seller = Seller.create(username=username, seller_id = user_id, flightcode=flightcode, departure_time=departure_time,departure_date=departure_date,departure_location=departure_location,destination=destination,choice="luggage")
+    return redirect(url_for('seller.availability'))
 
 @seller_blueprint.route('/buy', methods=['POST'])
 def buyer():

@@ -270,3 +270,14 @@ html,body{
     bottom:0;
 }
 
+.noPic{
+    border-radius: 50%
+}
+
+#matched_user{
+    text-align: center;
+}
+
+.buy-btn{
+    animation-duration:1.8s;
+}

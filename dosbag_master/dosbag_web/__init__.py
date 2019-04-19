@@ -5,6 +5,7 @@ from dosbag_web.blueprints.user.views import user_blueprint
 from dosbag_web.blueprints.session.views import session_blueprint
 from dosbag_web.blueprints.profile.views import profile_blueprint
 from dosbag_web.blueprints.braintree.views import braintree_blueprint
+from dosbag_web.blueprints.sellHand.views import sellHand_blueprint
 
 from flask_assets import Environment, Bundle
 from .util.assets import bundles
@@ -14,11 +15,14 @@ import requests
 assets = Environment(app)
 assets.register(bundles)
 
+
+
 app.register_blueprint(seller_blueprint, url_prefix="/seller")
 app.register_blueprint(user_blueprint, url_prefix="/user")
 app.register_blueprint(session_blueprint, url_prefix="/session")
 app.register_blueprint(profile_blueprint, url_prefix="/profile")
 app.register_blueprint(braintree_blueprint, url_prefix="/braintree")
+app.register_blueprint(sellHand_blueprint, url_prefix="/sellHand")
 
 @app.errorhandler(500)
 def internal_server_error(e):
@@ -44,4 +48,4 @@ def homey():
 
 @app.route("/")
 def home() :
-    return render_template('Homepage.html')
+    return render_template('homepagev1.html')
