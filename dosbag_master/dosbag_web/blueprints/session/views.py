@@ -30,7 +30,7 @@ def check():
     return render_template('sessions/Login.html', emailerror="Wrong Email")
 
 
-@session_blueprint.route('/logout', methods=["POST"])
+@session_blueprint.route('/logout', methods=["POST","GET"])
 def logout():
     logout_user()
-    return redirect(url_for('session.login'))
+    return redirect('/')

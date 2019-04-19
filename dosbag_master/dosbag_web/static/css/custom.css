@@ -2,7 +2,7 @@ html,body{
     width: 100%;
 }
 
-.jumbotron {
+.homepage{
     height:100vh;
     width:100%;
     background-image: url('../Images/lady.jpeg');
@@ -128,7 +128,7 @@ html,body{
     font-family: 'Times New Roman', Times, serif;
     font-weight: bold; 
 }
-.lead{
+.lead-1{
     border-radius:5px;
     background-color: white;
     opacity: 0.5;
@@ -205,8 +205,6 @@ html,body{
 .errorstatement{
     color : red;
 }
-
-
 .profilepic{
     width:200px;
     border-radius: 10px;
@@ -214,6 +212,61 @@ html,body{
 
 .profilejumbo {
     height: 280px;
+}
+.button {
+    color:black;
+}
+.profile{
+    margin-top:-150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
 
+.our-team{
+    width:300px;
+    height: 400px;
+}
+
+.social{
+    width:100%;
+    height:200px;
+    background:royalblue;
+    position:absolute;
+    bottom: -500px;
+    left:0;
+    transition:all 0.5s ease 0s;
+}
+
+.our-team:hover .social{
+    bottom:0px;
+    border-radius:5px;
+}
+
+.profile-info{
+    
+    padding: 30px;
+}
+
+.user-profile{
+    margin-left:40px;
+    padding:20px;
+}
+
+.test3{
+    border:solid black 3px;
+    border-radius: 10px;
+    width:100%;
+}
+
+.profile-body{
+    background-color:royalblue;
+    background-size:cover;
+    height:300px;
+}
+
+.edit{
+    bottom:0;
 }
 

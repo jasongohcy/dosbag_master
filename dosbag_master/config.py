@@ -6,12 +6,11 @@ class Config(object):
     TESTING = False
     CSRF_ENABLED = True
     SECRET_KEY = os.environ.get(
-        'SECRET_KEY') or os.urandom(32)
+        'APP_SECRET_KEY') or os.urandom(32)
     S3_BUCKET = os.environ["S3_BUCKET"]
     S3_KEY = os.environ["S3_KEY"]
     S3_SECRET = os.environ["S3_SECRET_ACCESS_KEY"]
     S3_LOCATION = 'http://{}.s3.amazonaws.com/'.format(S3_BUCKET)
-
 
 class ProductionConfig(Config):
     DEBUG = False
