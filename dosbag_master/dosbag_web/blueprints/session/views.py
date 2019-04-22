@@ -24,10 +24,10 @@ def check():
         if email == e.email :
             if check_password_hash(e.password, password) :
                 login_user(e)
-                return redirect(url_for('seller.availability'))
+                return redirect(url_for('seller.sell'))
             else:
                 return render_template('session/Login.html', passworderror = "Wrong Password")
-    return render_template('sessions/Login.html', emailerror="Wrong Email")
+    return render_template('session/Login.html', emailerror="Wrong Email")
 
 
 @session_blueprint.route('/logout', methods=["POST","GET"])

@@ -28,6 +28,14 @@
                     <p class="lead">Enter flight information</p>
                     <input type="flightcode" class="form-control" id="flightcode" aria-describedby="flightcode" placeholder="Enter flight code" name="flightcode">
                     <br>
+                    <div class="form-group col-md-4">
+                        <label for="inputState">Choice of Sale</label>
+                        <select id="inputState" class="form-control" name ="choice">
+                          <option selected>Choose...</option>
+                          <option>Luggage</option>
+                          <option>Cabin</option>
+                        </select>
+                      </div>
                     <button type="submit" class="btn btn-primary btn-sm">Submit</button>
                 </form>
                 {%if error%}
