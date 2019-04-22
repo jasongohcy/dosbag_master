@@ -281,3 +281,7 @@ html,body{
 .buy-btn{
     animation-duration:1.8s;
 }
+
+.handprofilepic{
+    border-radius: 200px;
+}

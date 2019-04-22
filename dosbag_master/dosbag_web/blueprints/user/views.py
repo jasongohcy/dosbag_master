@@ -46,6 +46,7 @@ def create():
 
 @user_blueprint.route('/clarifai', methods=['GET'])
 def imageURL():
+    
     return render_template('user/clarifai.html')
 
 
@@ -70,6 +71,7 @@ def tags():
         ic_name = request.form.get('ic_name')
         ic_num = request.form.get('ic_num')
         nationality = request.form.get('nationality')
+        
         q = User(email=email, password=password, username=username,age=age,homeaddress=homeaddress,homeaddress2=homeaddress2,handphone=handphone,ic_name=ic_name,ic_num=ic_num,nationality=nationality)
         if q.save():
             user = User.get(User.username == username)

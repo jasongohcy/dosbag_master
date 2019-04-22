@@ -25,11 +25,11 @@ def show():
 def sellHand_show(fc):
     
     #check if FC exist in DB
-    result = Seller.select().where(Seller.choice=="luggage",Seller.flightcode==fc)
+    result = Seller.select().where(Seller.choice=="Cabin",Seller.flightcode==fc)
     
     if result:
 
-        seller_list = Seller.select().where(Seller.choice=="luggage",Seller.flightcode==fc,Seller.sold== False, Seller.buyer_id.is_null(True),Seller.sold.is_null(False))   
+        seller_list = Seller.select().where(Seller.choice=="Cabin",Seller.flightcode==fc,Seller.sold== False, Seller.buyer_id.is_null(True),Seller.sold.is_null(False))   
         
         ranNum = random.randint(0, seller_list.count())        
         ranNum -= 1
