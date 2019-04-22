@@ -13,11 +13,13 @@ class User(BaseModel,UserMixin):
     password = pw.CharField(unique=False,null=False)
     age = pw.CharField(unique=False,null=False)
     homeaddress = pw.CharField(unique=False,null=False)
+    homeaddress2 = pw.CharField(unique=False,null=True)
     handphone = pw.CharField(unique=False,null=False)
     ic_name = pw.CharField(unique=False,null=False)
     ic_num = pw.CharField(unique=True,null=False)
     nationality = pw.CharField(unique=False,null=False)
     profilepic = pw.CharField(null=True)
+    icpic = pw.CharField(null=True)
 
     def validate(self):
         duplicate_email = User.get_or_none(User.email == self.email )
@@ -40,4 +42,12 @@ class User(BaseModel,UserMixin):
         return Rate.select(
             pw.fn.ROUND(((pw.fn.SUM(Rate.score) / (pw.fn.COUNT(Rate.id) + 0.0))), 1).alias("average_score")
             ).where(Rate.user_being_rated_id == self.id)[0].average_score
-        
+    
+
+    @hybrid_property
+    def seller_number(self):
+        from models.seller import Seller
+        # number = User.select().join(Seller, on=(Seller.seller_id==User.id)).where(self.id == Seller.seller_id)
+        # number = User.get(self.id == User.id).join(Seller, on=(Seller.seller_id==User.id))
+        number = User.get(id=self.id)
+        return number

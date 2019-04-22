@@ -62,9 +62,13 @@
                             <option value="5">5</option>
                             </select>
                             <button type="submit" class="btn btn-outline-info">Submit</button>
-                        </form><em class="float-right" style="-webkit-text-fill-color: rgb(71, 207, 26)">Success</em></li>
+                        </form>
                     {%endif%}
                     <p>Score : {{p.seller_id.average_rating}} </p>
+                    
+                    <p>Whatsapp Contact :  <a href='https://wa.me/6{{p.seller_id.seller_number.handphone}}'><button style="background-color:transparent; border-color:transparent;"><img src="../../../../static/Images/whatsapp-button.png" height="40"/></button></a></p>
+                    
+                    <em class="float-right" style="-webkit-text-fill-color: rgb(71, 207, 26)">Success</em></li>
                 {%endfor%}
             {%else%}
                 <p>Your Purchase History Is Empty</p>

@@ -1,0 +1,101 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+    <!-- Navbar here -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="-webkit-text-fill-color: white">
+    <a class="navbar-brand" href="#">Dosbag</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://127.0.0.1:5000/seller">Marketplace</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Sell Hand Button -->
+    <div>
+        <a class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</a>
+        
+        
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+            <div class="modal-content">
+        
+                <!-- Modal Header -->
+                <div class="modal-header center" style="text-align: center;">
+                    <h4 class="modal-title">DOSBAG</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+        
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <label for="flight_code">Flight Code</label>
+                    <input id="flight_code_input"type="text" minlength="5" maxlength="6">
+                    <small class="form-text text-muted"><i>Note: Please allow your location before proceed with this</i></small>
+                </div>
+        
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-success" data-dismiss="modal" onclick="validateFC()">Search</button> -->
+                    <a id="loc" data-dismiss="modal"class="btn btn-success" onclick="validateFC()" style="color:white">Search</a>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>    
+     
+    <!-- JS here -->
+    <script>
+        
+        function validateFC(){
+            fc = document.getElementById('flight_code_input').value;
+            if(fc && /[A-Z]{2}\d{3,4}/.test(fc)){
+                getLocation()
+            }
+            else{
+                alert("Invalid Flight Code!")
+                document.getElementById('flight_code_input').value=""
+            }
+        }
+
+        function getLocation() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition); 
+              
+          } else { 
+            alert("Geolocation is not supported by this browser or you blocked your web browser from accessing your Geolocation")
+          }
+        }
+        
+        function showPosition(position) {
+          
+          latitude = position.coords.latitude;
+          longitude = position.coords.longitude;
+          fc = document.getElementById('flight_code_input').value;
+
+          document.getElementById("loc").href ='{{url_for("sellHand.checkLocation")}}' + `?lat=${latitude}&lng=${longitude}&fc=${fc}`
+          document.getElementById("loc").click()
+          document.getElementById('flight_code_input').value=""
+          
+        }
+        
+    </script>
+
+<hr>
+<footer class="lead" style="text-align: center">Created by Dosbag.inc </footer>
+<br>
+
+
+{% endblock %}

@@ -24,16 +24,17 @@
     <div class="container">
         <br>
         <p class="lead">Enter flight information</p>
-        <form>
+        <form action = "{{ url_for('seller.availability') }}" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <div class="row">
                 <div class="col-sm">
-                    <input type="plane_code" class="form-control" id="plane_code" placeholder="Enter plane code">
+                    <input type="text" class="form-control" name="flightcode" placeholder="Enter plane code">
                 </div>
                 <div class="col-sm">
                     <input type="text" class="form-control" name="time" placeholder="24hr format: 15:20:00" data-timepicker>
                 </div>
                 <div class="col-sm">
-                    <input type="date" class="form-control" id="date" placeholder="dd/mm/yy">
+                    <input   type="date" class="form-control" name="date" placeholder="mm/dd/yyyy">
                 </div>
             </div>
             <br>
@@ -47,20 +48,24 @@
     <div class="container">
         <hr>
         <br>
-        <p class="lead">All Sellers</p>
+        <p class="lead">List of Availability</p>
             <ul class="list-group">
-                {%for l in list_of_sellers%}
-                <form action = "{{ url_for('seller.buyer') }}" method="POST" >
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-                    <input type="hidden" name="flightcode" value="{{l.flightcode}}"/>
-                    <input type="hidden" name="departure_date" value="{{l.departure_date}}"/>
-                    <input type="hidden" name="departure_time" value="{{l.departure_time}}"/>
-                    <input type="hidden" name="departure_location" value="{{l.departure_location}}"/>
-                    <input type="hidden" name="destination" value="{{l.destination}}"/>
-                    <input type="hidden" name="username" value="{{l.username}}"/>
-                    <li class="list-group-item">{{l.flightcode}}                        {{l.departure_date}}                       {{l.departure_time}}                                 {{l.departure_location}}                                     {{l.destination}}{{l.username}}{%if current_user.username%}<button type="submit" class="btn btn-success btn-sm float-right">Buy</button>{%endif%}</li>
-                </form>
-                {%endfor%}
+                {%if available%}
+                    {%for a in available %}
+                    <form action = "{{ url_for('seller.buyer') }}" method="POST" >
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                        <input type="hidden" name="flightcode" value="{{a.flightcode}}"/>
+                        <input type="hidden" name="departure_date" value="{{a.departure_date}}"/>
+                        <input type="hidden" name="departure_time" value="{{a.departure_time}}"/>
+                        <input type="hidden" name="departure_location" value="{{a.departure_location}}"/>
+                        <input type="hidden" name="destination" value="{{a.destination}}"/>
+                        <input type="hidden" name="username" value="{{a.username}}"/>
+                        <li class="list-group-item">{{a.flightcode}}                        {{a.departure_date}}                       {{a.departure_time}}                                 {{a.departure_location}}                                     {{a.destination}}{{a.username}}{%if current_user.username and current_user.username != a.username %}<button type="submit" class="btn btn-success btn-sm float-right">Buy</button>{%endif%}</li>
+                    </form>
+                    {%endfor%}
+                {%else%}
+                    <p>No Available Flights</p>
+                {%endif%}
             </ul>
     </div>
     <br>

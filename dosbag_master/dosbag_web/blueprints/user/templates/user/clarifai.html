@@ -1,0 +1,77 @@
+{% extends "_layout.html" %}
+{% block content %}
+
+<div class="col-sm-12">
+    <div class="container">
+        <div class="col-md-12">
+            <div class="jumbotron jumbotron-fluid" style="background-image: ../user/phone.png">
+                <img src="../user/phone.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h1 style="text-align: center">Upload your document</h1>
+        {%if error%}
+            <p class="errorstatement" style="text-align: center"> {{error}}</p>
+        {%endif%}
+        <br>
+            <div class="d-flex align-items-start">
+                    <div class="col-md-5">
+                        <form class="form border" action = "{{ url_for('user.tags') }}" method="POST">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                            <div class="form-group">
+                            <h3>By URL</h3>
+                            <input type="text" class="form-control" id="imageURL" aria-describedby="imageURL" placeholder="URL format", name="imageURL">
+                            </div> 
+                            <input type="hidden" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email", name="email" value="{{email}}">
+                            <input type="hidden" class="form-control" id="username" placeholder="Username" name="username" value="{{username}}">
+                            <input type="hidden" class="form-control" id="password" placeholder="Password" name="password" value="{{password}}">
+                            <input type="hidden" class="form-control" id="age" placeholder="Age" name="age" value="{{age}}">
+                            <input type="hidden" class="form-control" id="homeadd" placeholder="home address" name="homeaddress" value="{{homeaddress}}">
+                            <input type="hidden" class="form-control" id="homeadd2" placeholder="home address" name="homeaddress2" value="{{homeaddress2}}">
+                            <input type="hidden" class="form-control" id="hpnum" placeholder="Handphone Number" name="handphone" value="{{handphone}}">
+                            <input type="hidden" class="form-control" id="ic_name" placeholder="IC Name" name="ic_name" value="{{ic_name}}">
+                            <input type="hidden" class="form-control" id="ic_num" placeholder="IC Number" name = "ic_num" value="{{ic_num}}">
+                            <input type="hidden" class="form-control" id="nationality" placeholder="Nationality" name="nationality" value="{{nationality}}">
+
+                            <button type="submit" class="btn btn-primary btn-block">Verify now</button>
+                        </form>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form " style="text-align: center">
+                            <h2>OR</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <form class="form border" action = "{{ url_for('user.localhost') }}" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token()}}"/>
+                           <h3>Upload by local host</h3>
+                            <input type="file" id="local"  placeholder="local", name="local" >
+                            <input type="hidden" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email", name="email" value="{{email}}">
+                            <input type="hidden" class="form-control" id="username" placeholder="Username" name="username" value="{{username}}">
+                            <input type="hidden" class="form-control" id="password" placeholder="Password" name="password" value="{{password}}">
+                            <input type="hidden" class="form-control" id="age" placeholder="Age" name="age" value="{{age}}">
+                            <input type="hidden" class="form-control" id="homeadd" placeholder="home address" name="homeaddress" value="{{homeaddress}}">
+                            <input type="hidden" class="form-control" id="homeadd2" placeholder="home address" name="homeaddress2" value="{{homeaddress2}}">
+                            <input type="hidden" class="form-control" id="hpnum" placeholder="Handphone Number" name="handphone" value="{{handphone}}">
+                            <input type="hidden" class="form-control" id="ic_name" placeholder="IC Name" name="ic_name" value="{{ic_name}}">
+                            <input type="hidden" class="form-control" id="ic_num" placeholder="IC Number" name = "ic_num" value="{{ic_num}}">
+                            <input type="hidden" class="form-control" id="nationality" placeholder="Nationality" name="nationality" value="{{nationality}}">
+                            <br><br>
+                            <button type="submit" class="btn btn-primary btn-block">Verify now</button>
+                        </form>
+                    </div>
+            </div>
+    </div>
+</div>
+</div>
+
+    
+    
+    
+
+
+
+
+
+{% endblock %}
