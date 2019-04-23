@@ -35,17 +35,22 @@
                 {% for error in errors if errors %}
                     <p style="text-align: center; -webkit-text-fill-color: rgb(213, 53, 53)">{{error}}</p>
                 {% endfor %}
+            
+
+            <br>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div>
                 <label for='email'>Email: </label>
                 <input type='text' name='email' class="form-control" value="{{current_user.email}}">
                 <br>
-                <label for='email'>Old Password: </label>
-                <input type='password' name='password' class="form-control">
-                {%if old_password_error%}
-                    <p style="text-align: center; -webkit-text-fill-color: rgb(213, 53, 53)">{{old_password_error}}</p>
-                {%endif%}
-                <br>
+            </div>
+            
+            
+            <br>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div>
                 <label for='email'>New Password: </label>
-                <input type='password' name='new_password' class="form-control">
+                <input type='password' name='new_password' class="form-control" placeholder="If You Do Not Wish To Update Password, Please Key In Your Current Password" >
                 {%if passworderror%}
                     <p style="text-align: center; -webkit-text-fill-color: rgb(213, 53, 53)">{{passworderror}}</p>
                 {%endif%}

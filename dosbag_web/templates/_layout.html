@@ -31,7 +31,7 @@
     <script>src="bootstrap-4.0.0-dist/js/scrollreveal.min.js"</script>
   </head>
   <body>
-    {% if current_user.is_authenticated %}
+    {% if current_user.id %}
       <nav class="navbar my-navbar navbar-expand-lg  fixed-top scrolling-navbar">
           <div class="container homepage-navbar">
             <a class="navbar-brand text-white" href="{{url_for('home')}}">Dosbag</a>
@@ -40,8 +40,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                  <li class="nav-item ">
-                    <a class="nav-link text-white" href="{{url_for('profile.profile')}}">Profile</a>
+                  <li class="nav-item active">
+                    <a class="nav-link text-white" href="{{url_for('profile.profile')}}">Profile <span class="sr-only"></span></a>
                   </li>
                   <li class="nav-item ">
                       <a class="nav-link text-white" href="{{url_for('seller.availability')}}">MarketPlace</a>
@@ -51,7 +51,8 @@
                   </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                  <a class="btn button btn-outline-dark mr-sm-2" type="submit" href="{{url_for('session.logout')}}">Logout</a>
+                  <!-- <a id="btn-logout" class="btn button btn-outline-dark mr-sm-2" type="submit" href="{{url_for('session.logout')}}">Logout</a> -->
+                  <a id="btn-logout" class="btn btn-sm display-4 btn-primary my-2 my-sm-0" type="submit" href="{{url_for('session.logout')}}">Logout</a>
                 </form>
               </div>
             </div>
@@ -69,9 +70,7 @@
                 <li class="nav-item ">
                     <a class="nav-link text-white" href="{{url_for('seller.availability')}}">MarketPlace</a>
                 </li>
-                <li class="nav-item ">
-                  <a class="nav-link text-white" href="{{url_for('seller.sell')}}">Sell</a>
-                </li>
+
               </ul>
               <form class="form-inline my-2 my-lg-0">
                 <a class="btn button btn-outline-dark mr-sm-2" type="submit" href="{{url_for('session.login')}}">Login</a>

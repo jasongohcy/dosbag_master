@@ -50,7 +50,7 @@
         <br>
         <p class="lead">List of Availability</p>
             <ul class="list-group">
-                {%if available%}
+                {%if available %}
                     {%for a in available %}
                     <form action = "{{ url_for('seller.buyer') }}" method="POST" >
                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
@@ -63,7 +63,20 @@
                         <li class="list-group-item">{{a.flightcode}}                        {{a.departure_date}}                       {{a.departure_time}}                                 {{a.departure_location}}                                     {{a.destination}}{{a.username}}{%if current_user.username and current_user.username != a.username %}<button type="submit" class="btn btn-success btn-sm float-right">Buy</button>{%endif%}</li>
                     </form>
                     {%endfor%}
-                {%else%}
+                {% elif list_of_sellers %}
+                    {%for a in list_of_sellers %}
+                    <form action = "{{ url_for('seller.buyer') }}" method="POST" >
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                        <input type="hidden" name="flightcode" value="{{a.flightcode}}"/>
+                        <input type="hidden" name="departure_date" value="{{a.departure_date}}"/>
+                        <input type="hidden" name="departure_time" value="{{a.departure_time}}"/>
+                        <input type="hidden" name="departure_location" value="{{a.departure_location}}"/>
+                        <input type="hidden" name="destination" value="{{a.destination}}"/>
+                        <input type="hidden" name="username" value="{{a.username}}"/>
+                        <li class="list-group-item">{{a.flightcode}}                        {{a.departure_date}}                       {{a.departure_time}}                                 {{a.departure_location}}                                     {{a.destination}}    {{a.username}}{%if current_user.username and current_user.username != a.username %}<button type="submit" class="btn btn-success btn-sm float-right">Buy</button>{%endif%}</li>
+                    </form>
+                    {%endfor%}
+                {%else%}                
                     <p>No Available Flights</p>
                 {%endif%}
             </ul>

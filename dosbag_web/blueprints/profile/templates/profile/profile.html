@@ -12,7 +12,12 @@
         <div class="row test text-center">
             <div class="our-team">
                 <div class="card test3" style="width: 18rem;">
-                    <img class="user-profile rounded-circle " src="{{pic}}" class="card-img-top" width="200px" height="200px">
+                        {%if current_user.profilepic%}
+                        <img class="user-profile rounded-circle " src="{{pic}}" class="card-img-top" width="200px" height="200px">
+                        {%else%}
+                        <img class="user-profile rounded-circle " src="../../../../static/Images/no_pic.gif" class="card-img-top" width="200px" height="200px">
+                        {%endif%}
+                    
                     <div class="card-body profile-info">
                         <h1 class="card-title">{{ current_user.username }}</h1>
                         <p class="card-text">

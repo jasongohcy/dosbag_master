@@ -1,0 +1,62 @@
+{% extends "_layout.html" %}
+{% block title %}
+  Edit Profile
+{% endblock %}
+{% block header %}
+{% endblock %}
+{% block content %}
+    <!-- Jumbotron here -->
+        <div id="jumbo" class="jumbotron jumbotron-fluid">
+            <br>
+            <div class="container">
+                <br>
+                <h1 class="display-4" style="text-align: center; -webkit-text-fill-color: white">Profile</h1>
+                <p class="lead" style="text-align: center; -webkit-text-fill-color: white">Edit Your Profile</p>
+            </div>
+            <br>
+        </div>
+
+    <!-- Edit profile info form -->
+
+    <div class="container">
+        <br/>
+        <h1>Edit infomation</h1>
+        <br/>
+
+        <form action="{{ url_for('profile.editprofile') }}" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div class="form-group">
+                <label for='username'>Username: </label>
+                <input type='text' name='username' class="form-control" value="{{current_user.username}}">
+                <br>
+                {% for error in errors if errors %}
+                    <p style="text-align: center; -webkit-text-fill-color: rgb(213, 53, 53)">{{error}}</p>
+                {% endfor %}
+                <label for='email'>Email: </label>
+                <input type='text' name='email' class="form-control" value="{{current_user.email}}">
+                <br>
+                <label for='email'>Old Password: </label>
+                <input type='password' name='password' class="form-control">
+                {%if old_password_error%}
+                    <p style="text-align: center; -webkit-text-fill-color: rgb(213, 53, 53)">{{old_password_error}}</p>
+                {%endif%}
+                <br>
+                <label for='email'>New Password: </label>
+                <input type='password' name='new_password' class="form-control">
+                {%if passworderror%}
+                    <p style="text-align: center; -webkit-text-fill-color: rgb(213, 53, 53)">{{passworderror}}</p>
+                {%endif%}
+            </div>
+    
+            <br/>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+    </div>
+
+
+
+<hr>
+<footer class="lead" style="text-align: center">Created by Dosbag.inc </footer>
+<br>
+
+{% endblock %}

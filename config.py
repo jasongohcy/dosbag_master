@@ -11,6 +11,7 @@ class Config(object):
     S3_KEY = os.environ["S3_KEY"]
     S3_SECRET = os.environ["S3_SECRET_ACCESS_KEY"]
     S3_LOCATION = 'http://{}.s3.amazonaws.com/'.format(S3_BUCKET)
+    FLIGHT_API_KEY = os.environ["FLIGHT_API_KEY"]
 
 class ProductionConfig(Config):
     DEBUG = False

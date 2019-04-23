@@ -1,23 +1,20 @@
 {% extends "_layout.html" %}
-{% block header %}
-{% endblock %}
 {% block content %}
     <!-- Navbar here -->
-    <br>
-    <br>
-    <br>
-    <h1 style="text-align: center">Sell Hand Market</h1>
 
-    <div class="container">
-        <hr>
-        <br>
-        
-        <div id="matched_user">
-            <p class="lead">We matched this hand for you</p><br>
-            <img src="{{seller.seller_id.profilepic_url}}" alt="" width="250px" height="250px" class="handprofilepic"><br><br>
-            <p class="lead">{{seller.seller_id.ic_name}}</p><br>
-            <a href="{{url_for('sellHand.confirmBuy', seller_id=seller.seller_id.id)}}"><img id="buyButton" src="/static/Images/buy_button.png" alt="" class="btn buy-button ld ld-heartbeat" onclick="buyFromThisCustomer"></a>
-        </div> 
+    <div id="sellHand-market">
+        <h1 style="text-align: center">Sell Hand Market</h1>
+        <div class="container" >
+            <hr>
+            <br>
+            <div id="matched_user">
+                <p class="lead" style="font-family: Cursive, Garamond, Comic Sans MS;"><i>We matched this hand for you</i></p><br>
+                <img src="/static/Images/no_pic.gif" alt="" class="noPic"><br><br>
+                <p class="lead"><b>{{seller.seller_id.ic_name}}</b></p><br>
+                <a href="{{url_for('sellHand.confirmBuy', seller_id=result)}}"><img id="buyButton" src="/static/Images/buy_button.png" alt="" class="btn buy-button ld ld-heartbeat" onclick="buyFromThisCustomer"></a>
+                <br><br><br>
+            </div> 
+        </div>
     </div>
 
     <!-- JS here -->
@@ -32,8 +29,6 @@
         }    
             
     </script>
-
-<hr>
-<footer class="lead" style="text-align: center">Created by Dosbag.inc </footer>
 <br>
+<footer class="lead" style="text-align: center">Created by Dosbag.inc </footer>
 {% endblock  %}

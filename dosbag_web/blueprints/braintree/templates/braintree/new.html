@@ -6,14 +6,16 @@
 {% endblock %}
 {% block content %}
 
-<div class="wrapper" style="background-image: url(../../../../static/Images/payment_background.jpg); background-repeat:no-repeat; background-size: cover;" >
+<div class="wrapper" style="background-image: url(../../../../static/Images/payment_background.jpg); background-repeat:no-repeat; background-size: cover; height: -webkit-fill-available; " >
   <div class="checkout container" >
-
+    <br>
+    <br>
+    <br>
     <div class="container">
       </br>
       <h1 style="-webkit-text-fill-color: white">Hi, {{current_user.username}}</h1>
       <p style="-webkit-text-fill-color: white">
-        Make a payment with Braintree using a card
+        Make a payment with Braintree
       </p>
   </div>
   <div class="container" style="background-color: white;"></div>
@@ -21,9 +23,18 @@
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         <section>
             <label for="amount">
-            <span class="input-label">Amount</span>
+            <span class="input-label" style="-webkit-text-fill-color: white;">Amount</span>
             <div class="input-wrapper amount-wrapper">
-                <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="50" >
+                <!-- <div class="input-group mb-3"> -->
+                      <!-- <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                      </div>
+                      <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                      <div class="input-group-append">
+                        <span class="input-group-text">.00</span>
+                      </div>
+                    </div> -->
+                <input readonly id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="50">
             </div>
             </label>
 
@@ -33,36 +44,35 @@
         </section>
 
         <input type="hidden" id="nonce" name="payment_method_nonce" />
-        <button class="button" type="submit" id="submit-button"><span>Test Transaction</span></button>
+        <button class="button" type="submit" id="submit-button"><span>Proceed payment</span></button>
     </form>
 
   </div>
 </div>
 
-<script src="https://js.braintreegateway.com/web/dropin/1.17.0/js/dropin.min.js"></script>
-<script>
-  var form = document.querySelector('#payment-form');
-  var client_token = '{{ client_token }}';
-  braintree.dropin.create({
-    authorization: client_token,
-    container: '#bt-dropin',
-    paypal: {
-      flow: 'vault'
-    }
-  }, function (createErr, instance) {
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-      instance.requestPaymentMethod(function (err, payload) {
-        if (err) {
-          console.log('Error', err);
-          return;
-        }
-        // Add the nonce to the form and submit
-        document.querySelector('#nonce').value = payload.nonce;
-        form.submit();
+  <script src="https://js.braintreegateway.com/web/dropin/1.17.0/js/dropin.min.js"></script>
+  <script>
+    var form = document.querySelector('#payment-form');
+    var client_token = '{{ client_token }}';
+    braintree.dropin.create({
+      authorization: client_token,
+      container: '#bt-dropin',
+      paypal: {
+        flow: 'vault'
+      }
+    }, function (createErr, instance) {
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        instance.requestPaymentMethod(function (err, payload) {
+          if (err) {
+            console.log('Error', err);
+            return;
+          }
+          // Add the nonce to the form and submit
+          document.querySelector('#nonce').value = payload.nonce;
+          form.submit();
+        });
       });
     });
-  });
-</script>
-
+  </script>
 {% endblock %}

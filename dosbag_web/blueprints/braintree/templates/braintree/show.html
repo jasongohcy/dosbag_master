@@ -1,13 +1,10 @@
 {% extends '_layout.html' %}
 {% block content %}
-
+<div style="background-image: url(../../../../static/Images/payment_background.jpg); background-repeat:no-repeat; background-size: cover; height: 100%; -webkit-text-fill-color: white">
 <div class="wrapper">
+  <br><br><br>
   <div class="response container">
     <div class="content">
-      <div class="icon">
-        <img src="/static/images/{{ result['icon'] }}.svg" alt="icon">   
-      </div>
-
       <h1>{{ result['header'] }}</h1>
       <section>
         <p>{{ result['message'] }}</p>
@@ -15,13 +12,15 @@
 
       <section>
         <a class="button primary back" href="{{url_for('home')}}">
-          <span>Back to Home</span>
+          <button type="button" class="btn btn-primary btn-sm">Back to Home</button>
         </a>
       </section>
+      <br>
     </div>
   </div>
 </div>
 
+<div class="container">
 <aside class="drawer dark">
   <header>
     <div class="contentcompact">
@@ -141,15 +140,9 @@
       </section>
     {% endif %}
 
-    <section>
-      <p class="center small">Integrate with the Braintree SDK for a secure and seamless checkout</p>
-    </section>
-
-    <section>
-      <a class="button secondary full" href="https://developers.braintreepayments.com/guides/drop-in" target="_blank">
-        <span>See the Docs</span>
-      </a>
-    </section>
   </article>
 </aside>
+</div>
+<br><br>
+</div>
 {% endblock %}

@@ -1,0 +1,89 @@
+{% extends "_layout.html" %}
+{% block title %}
+  ProfilePage
+{% endblock %}
+{% block header %}
+{% endblock %}
+{% block content %}
+
+    <!-- Navbar here -->
+<div class="profile-body"></div>
+    <div class="container profile">
+        <div class="row test text-center">
+            <div class="our-team">
+                <div class="card test3" style="width: 18rem;">
+                    {%if current_user.profilepic%}
+                    <img class="user-profile rounded-circle " src="{{pic}}" class="card-img-top" width="200px" height="200px">
+                    {%else%}
+                    <img class="user-profile rounded-circle " src="../../../../static/Images/no_pic.gif" class="card-img-top" width="200px" height="200px">
+                    {%endif%}
+                    <div class="card-body profile-info">
+                        <h1 class="card-title">{{ current_user.username }}</h1>
+                        <p class="card-text">
+                            {{ current_user.ic_name }}
+                        </p>
+                        <p class="card-text">
+                            {{ current_user.handphone }}
+                        </p>
+                    </div>
+                    <div class="social">
+                        <form action="{{ url_for('profile.profilepic') }}" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                            <br><br>
+                            <input class="bg-white btn-block"type="file" name="user_file">
+                            <button class="btn btn-success btn-sm btn-block" type="submit">Upload</button>
+                        </form>
+                        <a type="submit" class="btn btn-primary btn-sm btn-block edit" href="{{url_for('profile.edit')}}">Edit Info</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile info -->
+    
+
+    <!-- Purchase History -->
+    <div class="container ">
+        <h2>Purchase history</h2>
+        <ul class="list-group purchase">
+            {%if purchase%}
+                {%for p in purchase%}
+                    <li class="list-group-item ">Seller : {{p.username}}<br>Purchase Time : {{p.updated_at}}<br>
+                     {% if p.seller_id.id in rated_ids %}
+                            <p>This User Has Been Rated By You</p>
+                    {%else%}
+                        <form class="form-inline" action="{{ url_for('profile.rate') }}" method="POST">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                            <input type="hidden" name="user_being_rated_id" value="{{p.seller_id}}"/>
+                            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Rate</label>
+                            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="rate">
+                            <option selected>Choose...</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            </select>
+                            <button type="submit" class="btn btn-outline-info">Submit</button>
+                        </form>
+                    {%endif%}
+                    <p>Score : {{p.seller_id.average_rating}} </p>
+                    
+                    <p>Whatsapp Contact :  <a href='https://wa.me/6{{p.seller_id.seller_number.handphone}}'><button style="background-color:transparent; border-color:transparent;"><img src="../../../../static/Images/whatsapp-button.png" height="40"/></button></a></p>
+                    
+                    <em class="float-right" style="-webkit-text-fill-color: rgb(71, 207, 26)">Success</em></li>
+                {%endfor%}
+            {%else%}
+                <p>Your Purchase History Is Empty</p>
+            {%endif%}
+        </ul>
+    </div>
+
+
+<hr>
+<footer class="lead" style="text-align: center">Created by Dosbag.inc </footer>
+<br>
+
+
+{% endblock %}

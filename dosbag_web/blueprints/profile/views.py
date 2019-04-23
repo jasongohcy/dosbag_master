@@ -75,28 +75,62 @@ def userprofile(id):
 def edit():
     return render_template('profile/editprofile.html')
 
-@profile_blueprint.route('/editprocess', methods=['POST'])
+# @profile_blueprint.route('/editusername', methods=['POST'])
+# @login_required
+# def editusername():
+#     username = request.form.get('username')
+#     user = User.get(User.username == current_user.username) 
+#     user.username = username
+#     if user.save():    
+#         return redirect(url_for('profile.profile'))
+#     else :
+#         return render_template("profile/editprofile.html", errors=user.errors)
+
+# @profile_blueprint.route('/editemail', methods=['POST'])
+# @login_required
+# def editemail():
+#     email = request.form.get('email')
+#     user = User.get(User.username == current_user.username) 
+#     user.email = email
+#     if user.save():    
+#         return redirect(url_for('profile.profile'))
+#     else :
+#         return render_template("profile/editprofile.html", errors=user.errors)
+
+# @profile_blueprint.route('/editemail', methods=['POST'])
+# @login_required
+# def editpassword():
+#     new_password = request.form.get('new_password')
+#     new_hashed_password = generate_password_hash(new_password)
+#     user = User.get(User.username == current_user.username) 
+#     if re.search(".{6,}",new_password) and re.search("[a-z]",new_password) and re.search("[A-Z]",new_password) and re.search ("\W",new_password):
+#         user.password =new_hashed_password
+#         return redirect(url_for('profile.profile'))
+#     else :
+#         return render_template('profile/editprofile.html', passworderror="Password must have at least 6 characters,contains symbols,small and capital letters.")
+    
+
+
+@profile_blueprint.route('/editprofile', methods=['POST'])
 @login_required
 def editprofile():
     email = request.form.get('email')
     username = request.form.get('username')
-    password = request.form.get('password')
     new_password = request.form.get('new_password')
     new_hashed_password = generate_password_hash(new_password)
-    if check_password_hash(current_user.password, password) : 
-        if re.search(".{6,}",new_password) and re.search("[a-z]",new_password) and re.search("[A-Z]",new_password) and re.search ("\W",new_password):
-            user = User.get(User.username == current_user.username) 
-            user.username = username
-            user.email = email
-            user.password =new_hashed_password
-            if user.save():    
-                return redirect(url_for('profile.profile'))
-            else :
-                return render_template("profile/editprofile.html", errors=user.errors)
+    if re.search(".{6,}",new_password) and re.search("[a-z]",new_password) and re.search("[A-Z]",new_password) and re.search ("\W",new_password):
+        user = User.get(User.username == current_user.username) 
+        user.username = username
+        user.email = email
+        user.password =new_hashed_password
+        if user.save():    
+            return redirect(url_for('profile.profile'))
         else :
-            return render_template('profile/editprofile.html', passworderror="Password must have at least 6 characters,contains symbols,small and capital letters.")
-    else:
-        return render_template('profile/editprofile.html', old_password_error = "The Old Password You Keyed In Does Not Match The Current Password You Have")
+            return render_template("profile/editprofile.html", errors=user.errors)
+    else :
+        return render_template('profile/editprofile.html', passworderror="Password must have at least 6 characters,contains symbols,small and capital letters.")
+    
+
 
 
 @profile_blueprint.route('/rate', methods=['POST'])

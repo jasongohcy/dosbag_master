@@ -4,13 +4,14 @@ import re
 from models.seller import Seller
 import datetime
 from flask_login import login_user,UserMixin,login_required,logout_user,current_user
+import os
 
 seller_blueprint = Blueprint('seller',
                             __name__,
                             template_folder='templates')
 
 
-
+api = os.environ.get('FLIGHT_API_KEY')
 
 # @seller_blueprint.route('/', methods=['GET'])
 # def seller():
@@ -32,13 +33,26 @@ def availability():
     flightcode = request.form.get('flightcode')
     time = request.form.get('time')
     date = request.form.get('date')
-    available = Seller.select().where((Seller.flightcode==flightcode) & (Seller.departure_date==date) & (Seller.departure_time==time) & (Seller.sold ==False) & (Seller.choice=='Luggage'))
+    available = Seller.select().where((Seller.flightcode==flightcode) & (Seller.departure_date==date) & (Seller.departure_time==time) & (Seller.sold ==False) & (Seller.choice=='Luggage') & (Seller.seller_id!=current_user.id))
     
-    return render_template('seller/marketplace.html', available=available)
+    now = str(datetime.datetime.now())
+    
+    d = re.search('\d+-\d+-\d+', now)
+    if d :
+        date = d.group(0)
+    
+    t = re.search('\d+:\d+:\d+', now)
+    if t :
+        time = t.group(0)
+
+    list_of_sellers = Seller.select().where((Seller.departure_date >= date) & (Seller.sold != True) & (Seller.choice=='Luggage') & (Seller.seller_id!=current_user.id))
+    # breakpoint()
+    return render_template('seller/marketplace.html', available=available,list_of_sellers=list_of_sellers)
 
 
 
 @seller_blueprint.route('/sell', methods=['GET'])
+@login_required
 def sell():
     return render_template('seller/seller.html')
 
@@ -46,7 +60,7 @@ def sell():
 def check():
     flightcode= request.form.get('flightcode')
     choice = request.form.get('choice')
-    r= requests.get(' http://aviation-edge.com/v2/public/timetable?key=342cbb-b8d23f&iataCode=KUL&type=departure')
+    r= requests.get(f"http://aviation-edge.com/v2/public/timetable?key={api}&iataCode=KUL&type=departure")
     reply = r.json()
     code = [i['flight']['iataNumber'] for i in reply]
 
@@ -88,18 +102,19 @@ def post():
 
 @seller_blueprint.route('/buy', methods=['POST'])
 def buyer():
-    # flightcode = request.form.get('flightcode')
-    # departure_time = request.form.get('departure_time')
-    # departure_date = request.form.get('departure_date')
-    # departure_location = request.form.get('departure_location')
-    # destination = request.form.get('destination')
+    flightcode = request.form.get('flightcode')
+    departure_time = request.form.get('departure_time')
+    departure_date = request.form.get('departure_date')
+    departure_location = request.form.get('departure_location')
+    destination = request.form.get('destination')
     username = request.form.get('username')
-    seller = Seller.get(Seller.username == username)
+    seller = Seller.get((Seller.username == username)& (Seller.flightcode==flightcode)& (Seller.departure_time==departure_time) &(Seller.departure_date==departure_date) & (Seller.departure_location==departure_location) & (Seller.destination==destination))
     seller.buyer_id = current_user.id
     seller.sold = True
     seller.amount = 50
     seller.save()
-    # seller = (Seller.update({}))
+    
+
     return redirect(url_for('braintree.new_checkout'))
 
 

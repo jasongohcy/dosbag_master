@@ -27,7 +27,7 @@ class User(BaseModel,UserMixin):
         if duplicate_email and not duplicate_email.id == self.id:
             self.errors.append('Email already exist')
         
-        if duplicate_username :
+        if duplicate_username and not duplicate_email.id == self.id :
             self.errors.append('Username already exist')
         
         return True

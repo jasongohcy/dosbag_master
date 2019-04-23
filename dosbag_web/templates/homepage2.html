@@ -1,0 +1,161 @@
+{% extends "_layout.html" %}
+{% block title %}
+  
+{% endblock %}
+{% block header %}
+{% endblock %}
+{% block content %}
+
+<body>
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+        <div class="modal-content">
+    
+            <!-- Modal Header -->
+            <div class="modal-header center" style="text-align: center;">
+                <h4 class="modal-title">DOSBAG</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+    
+            <!-- Modal body -->
+            <div class="modal-body">
+                <label for="flight_code">Flight Code</label>
+                <input id="flight_code_input"type="text" minlength="5" maxlength="6">
+                <small class="form-text text-muted"><i>Note: Please allow your location before proceed with this</i></small>
+            
+            </div>
+    
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-success" data-dismiss="modal" onclick="validateFC()">Search</button> -->
+                <a id="loc" data-dismiss="modal"class="btn btn-success" onclick="validateFC()" style="color:white">Search</a>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+
+    <!-- jumbotron -->
+    <div class="jumbotron jumbotron-fluid homepage">
+        <div class="container">
+            <br><br>
+            <h1 class="display-4 welcome" style="font-family: verdana">Welcome To Dosbag</h1>
+            {%if current_user.id%}
+            <h4 class="lead-2">Welcome {{current_user.username}}</h5>
+            {%else%}
+            <h5 class="lead-2">Wanna buy some luggage space?</h5>
+            <h5 class="lead-2">You come to the right place!</h5>
+            {%endif%}
+            <div class="mbr-section-btn">
+                {%if current_user.id%}
+                <a id="btn-buy-lug" style="background-color: rgba(121, 4, 4, 0.808); color: white;" class="btn btn-md btn-secondary display-4" href="{{url_for('seller.availability')}}">Buy Luggage Space</a>
+                <a id="btn-help-hand" class="btn btn-md btn-white-outline display-4" data-toggle="modal" data-target="#myModal">Helping Hand</a>
+                {%else%}
+                <a id="btn-buy-lug"  style="background-color: rgba(121, 4, 4, 0.808); color: white;" class="btn btn-md btn-secondary display-4" href="{{url_for('session.login')}}">Buy Luggage Space</a>
+                <a id="btn-help-hand" class="btn btn-md btn-white-outline display-4" href="{{url_for('session.login')}}">Helping Hand</a>
+                {%endif%}
+            </div>
+        </div>
+    </div>
+
+    <!-- How to steps -->
+    <div class="container">
+            <h1 class="text-center container-text1">How To Use Dosbag</h1>
+            
+            <div class="card-deck d-flex justify-content-center">
+              <div class="row">
+                  <div class="col text-center card-item">
+                    <div class="card-test shadow p-3 mb-5 bg-white rounded" id="card-steps">
+                      <div class="card-body">
+                          <!-- <h1>1</h1> -->
+                        <h5 class="card-title">Registration</h5>
+                        <p class="card-text">Fill up the necessary sign up details.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col text-center card-item">
+                    <div class="card shadow p-3 mb-5 bg-white rounded" id="card-steps">   
+                      <div class="card-body">
+                          <!-- <h1>2</h1> -->
+                        <h5 class="card-title">Verification</h5>
+                        <p class="card-text">Know Your Customer (KYC):<br>Users required to submit Identity card</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col text-center card-item">
+                    <div class="card shadow p-3 mb-5 bg-white rounded" id="card-steps">   
+                      <div class="card-body">
+                          <!-- <h1>3</h1> -->
+                        <h5 class="card-title">Marketplace</h5>
+                        <p class="card-text">Willing seller of excess space post in advance and willing buyer bid for the luggage space.Appoint a time to meet before check-in.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col text-center card-item">
+                    <div class="card shadow p-3 mb-5 bg-white rounded" id="card-steps">   
+                      <div class="card-body">
+                          <!-- <h1>4</h1> -->
+                        <h5 class="card-title">Handover and Rating</h5>
+                        <p class="card-text">During handover, seller will check-in together with buyer and "share the luggage weight" with the buyer.*Try to avoid buyer's luggage under your passport name</p>
+                      </div>
+                    </div>
+                  </div>
+          
+                </div>
+              </div>
+    </div>
+
+              <div class="container-fluid">
+                    <div class="parallax text-center">
+                        
+                        <div class="col-1"></div>
+                        <div class="col-5 text-center">
+                          <h1>Our Goal</h1>
+                          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                        </div>
+                    </div>
+                </div>
+</body>
+<script>
+    function validateFC(){
+      fc = document.getElementById('flight_code_input').value;
+      if(fc && /[A-Z]{2}\d{3,4}/.test(fc)){
+          getLocation()
+      }
+      else{
+          alert("Invalid Flight Code!")
+          document.getElementById('flight_code_input').value=""
+      }
+    }
+
+    function getLocation() {
+        if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition); 
+            
+        } else { 
+        alert("Geolocation is not supported by this browser or you blocked your web browser from accessing your Geolocation")
+        }
+    }
+    
+    function showPosition(position) {
+        
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+        fc = document.getElementById('flight_code_input').value;
+
+        document.getElementById("loc").href ='{{url_for("sellHand.checkLocation")}}' + `?lat=${latitude}&lng=${longitude}&fc=${fc}`
+        document.getElementById("loc").click()
+        document.getElementById('flight_code_input').value=""
+        
+    }
+</script>
+
+<br>
+<footer class="lead" style="text-align: center">Created by Dosbag.inc </footer>
+<br>
+
+
+{% endblock %}

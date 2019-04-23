@@ -23,12 +23,12 @@
         <div class="menu-logo">
             <div class="navbar-brand">
                 
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-2" href="https://mobirise.com">
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-2" href="{{url_for('home')}}">
                         Dosbag&nbsp;</a></span>
             </div>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item dropdown"><a class="nav-link link text-white display-4" href="{{url_for('user.signup')}}">
+            
                         <br><br></a></li></ul>
             <div class="navbar-buttons mbr-section-btn">
                 {%if current_user.id%}
@@ -60,6 +60,7 @@
             <label for="flight_code">Flight Code</label>
             <input id="flight_code_input"type="text" minlength="5" maxlength="6">
             <small class="form-text text-muted"><i>Note: Please allow your location before proceed with this</i></small>
+        
         </div>
 
         <!-- Modal footer -->
@@ -80,14 +81,18 @@
         <div class="row justify-content-md-center">
             <div class="mbr-white col-md-10">
                 <h1 class="mbr-section-title mbr-bold pb-3 mbr-fonts-style display-1">DOSBAG</h1>
+                {%if current_user.id%}
+                <p class="mbr-text pb-3 mbr-fonts-style display-5">Welcome {{current_user.username}}</p>
+                {%else%}
                 <p class="mbr-text pb-3 mbr-fonts-style display-5">Secondary market for unutilized check-in baggage for half the price!</p>
+                {%endif%}
                 <div class="mbr-section-btn">
                     {%if current_user.id%}
-                    <a class="btn btn-md btn-secondary display-4" href="{{url_for('seller.availability')}}">Trade check-in luggage</a>
-                    <a class="btn btn-md btn-white-outline display-4" data-toggle="modal" data-target="#myModal">Sell your hand</a>
+                    <a class="btn btn-md btn-secondary display-4" href="{{url_for('seller.availability')}}">Buy Luggage Space</a>
+                    <a class="btn btn-md btn-white-outline display-4" data-toggle="modal" data-target="#myModal">Helping Hand</a>
                     {%else%}
-                    <a class="btn btn-md btn-secondary display-4" href="{{url_for('session.login')}}">Trade check-in luggage</a>
-                    <a class="btn btn-md btn-white-outline display-4" href="{{url_for('session.login')}}">Sell your hand</a>
+                    <a class="btn btn-md btn-secondary display-4" href="{{url_for('session.login')}}">Buy Luggage Space</a>
+                    <a class="btn btn-md btn-white-outline display-4" href="{{url_for('session.login')}}">Helping Hand</a>
                     {%endif%}
                 </div>
             </div>
@@ -315,10 +320,6 @@
           document.getElementById("loc").click()
           document.getElementById('flight_code_input').value=""
           
-        }
-
-        function checksession(){
-            if sessionStorage.getItem()
         }
         
     </script>

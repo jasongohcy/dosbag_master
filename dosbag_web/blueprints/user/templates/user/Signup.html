@@ -5,11 +5,14 @@
 {% block header %}
 {% endblock %}
 {% block content %}
-<h1 style="text-align: center">Sign Up</h1>
-<div class="container-fluid">
-    <div class="col-md-12 border p-2 m-2">
+<body class="body1" >
+<h1 class ="signup text-white"style="text-align: center ">Sign Up</h1>
+<div class="container-fluid text-white p-10 d-flex justify-content-center align-items-center" >
+    <div class="col-md-8 border  p-2 m-2" >
         <form class="form" action = "{{ url_for('user.create') }}" method="POST">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <h1 class ="signup text-white"style="text-align: center ">Sign Up</h1>
+            <br><br>
             <div class="form-row">
                 <div class="form-group col-md-4">
                 <label for="inputEmail4">Email</label>
@@ -20,7 +23,7 @@
                 </div>
                 <div class="form-group col-md-4">
                 <label for="inputUsername4">Username</label>
-                <input type="username" name="username" class="form-control" id="username" placeholder="Username">
+                <input type="username" name="username" class="form-control " id="username" placeholder="Username">
                 {% if usernameerror %}
                     <p class="errorstatement">{{usernameerror}}</p>
                 {%endif%}
@@ -61,7 +64,7 @@
                 <input type="text" name="ic_name" class="form-control" id="ic_name">
                 </div>
                 <div class="form-group col-md-6">
-                <label for="inputNationality">IC Number/label>
+                <label for="inputNationality">Identity Card Number</label>
                 <input type="text" name="ic_num" class="form-control" id="ic_num">
                 </div>
             </div>
@@ -73,9 +76,13 @@
                 </label>
                 </div>
             </div>
-            <button type="submit-fluid" class="btn btn-primary">Sign in</button>
+            <button type="submit-fluid" class="btn btn-warning btn-block ">Sign in</button>
         </form>
     </div>
 </div>
 
+<div class="card-footer text-white text-center bg-body">
+    <h3 class="footer">Created By Dosbag</h3>
+</div>
+</body>
 {% endblock %}

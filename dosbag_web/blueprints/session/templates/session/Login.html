@@ -1,34 +1,45 @@
 {% extends "_layout.html" %}
+
 {% block title %}
   SignUp Page
 {% endblock %}
-{% block header %}
-{% endblock %}
+
 {% block content %}
 <body class="body1">
-        <div class="jumbotron1 jumbotron-fluid">
-                <h1 class="login2 text-white text-center">Login</h1>
-                <div class="container">
+
+  <div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="jumbotron1 jumbotron-fluid">
+                
+                <div class="container">                        
                     <form class="form1" action = "{{ url_for('session.check') }}" method="POST">
                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                        <h1 class="login2 text-white text-center">Login</h1>
+                        <br><br>
                         <div class="form-group">
-                            <label class="text-white ">Email address</label>
+                            <label class="text-white "><b>Email address</b></label>
                             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name = "email">
                         </div>
                         {%if emailerror%}
                             <p class="errorstatement">{{emailerror}}</p>
                         {%endif%}
                         <div class="form-group">
-                            <label class="text-white ">Password</label>
+                            <label class="text-white "><b>Password</b></label> 
                             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password", name= "password">
                         </div>
                         {%if passworderror%}
                             <p class="errorstatement">{{passworderror}}</p>
                         {%endif%}
-                        <button type="submit" class="btn btn-warning btn-lg btn-block">Login</button>
+                        <button id="btn-login" class="btn btn-primary btn-lg btn-block"><b>Login</b></button>
+                        <a href="{{url_for('user.signup')}}" id="btn-signup" class="btn btn-warning btn-lg btn-block"><b>Sign Up</b></a>
                     </form>
                 </div>
+            </div>
         </div>
+        <div class="col-md-4"></div>
+    </div>    
     <hr>
         <div class="card-footer text-white text-center bg-body">
                 <h3 class="footer">Created By Dosbag</h3>
