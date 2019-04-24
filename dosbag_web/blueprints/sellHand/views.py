@@ -33,17 +33,21 @@ def sellHand_show(fc):
     
     if result:
         
-        seller_list = Seller.select().where(Seller.choice=="Cabin",Seller.flightcode==fc,Seller.sold== False, Seller.buyer_id.is_null(True),Seller.sold.is_null(False))   
-        
-        ranNum = random.randint(0, seller_list.count())        
-        ranNum -= 1
+        if current_user.is_authenticated :
 
-        if ranNum < 0:
-            ranNum = 0
-        else:
-            ranNum=ranNum    
+            seller_list = Seller.select().where(Seller.choice=="Cabin",Seller.flightcode==fc,Seller.sold== False, Seller.buyer_id.is_null(True),Seller.sold.is_null(False) & (Seller.seller_id!=current_user.id))   
+            
+            ranNum = random.randint(0, seller_list.count())        
+            ranNum -= 1
+
+            if ranNum < 0:
+                ranNum = 0
+            else:
+                ranNum=ranNum
+            
+            return render_template('sellHand/sellHand_market.html', seller=seller_list[ranNum],result=result[ranNum].id)     
+
         
-        return render_template('sellHand/sellHand_market.html', seller=seller_list[ranNum],result=result[ranNum].id)     
 
     else:
         return render_template('homepage2.html', noflight = "No Available Sellers")
