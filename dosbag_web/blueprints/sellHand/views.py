@@ -46,7 +46,7 @@ def sellHand_show(fc):
         return render_template('sellHand/sellHand_market.html', seller=seller_list[0],result=result[ranNum].id)     
 
     else:
-        return render_template('sellHand/sellHand.html')
+        return render_template('homepage2.html', noflight = "No Available Sellers")
 
 @sellHand_blueprint.route('/location', methods=['GET'])
 def checkLocation():

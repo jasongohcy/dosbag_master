@@ -155,15 +155,15 @@ html,body{
 }
 
 .parallax {
-    height: 40vw;
     background-attachment: fixed;
-    background-image: url("../Images/luggage.jpeg");
+    /* background-image: url("../Images/luggage.jpeg"); */
+    background-image: url("https://images.unsplash.com/photo-1495320520040-44186a20c601?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80");
     background-position: 100%;
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
-    display: flex;
-    align-items:center;
+    /* display: flex;
+    align-items:center; */
 }
 
 .example {
@@ -331,4 +331,12 @@ html,body{
 #btn-logout {
     background-color: rgba(30, 163, 30, 0.884);
     color: black;
+}
+
+#marketplace {
+    background-image: url("../Images/marketplace_image1.jpg") ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height:345px;
+    color: gray;
 }

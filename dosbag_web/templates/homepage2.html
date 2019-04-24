@@ -35,24 +35,26 @@
         </div>
         </div>
     </div>
-
-
+    
 
     <!-- jumbotron -->
     <div class="jumbotron jumbotron-fluid homepage">
         <div class="container">
             <br><br>
-            <h1 class="display-4 welcome" style="font-family: verdana">Welcome To Dosbag</h1>
+            <h1 class="display-4 welcome" style="font-family: verdana">Dosbag</h1>
             {%if current_user.id%}
             <h4 class="lead-2">Welcome {{current_user.username}}</h5>
             {%else%}
-            <h5 class="lead-2">Wanna buy some luggage space?</h5>
-            <h5 class="lead-2">You come to the right place!</h5>
+            <h5 style='-webkit-text-fill-color: black'class="lead-2">The only secondary market for unutilized check-in baggage for half the price</h5>
+            <h5 class="lead-2">+ You can also sell your cabin space</h5>
             {%endif%}
             <div class="mbr-section-btn">
                 {%if current_user.id%}
                 <a id="btn-buy-lug" style="background-color: rgba(121, 4, 4, 0.808); color: white;" class="btn btn-md btn-secondary display-4" href="{{url_for('seller.availability')}}">Buy Luggage Space</a>
                 <a id="btn-help-hand" class="btn btn-md btn-white-outline display-4" data-toggle="modal" data-target="#myModal">Helping Hand</a>
+                {%if noflight %}
+                  {{noflight}}
+                {%endif%}
                 {%else%}
                 <a id="btn-buy-lug"  style="background-color: rgba(121, 4, 4, 0.808); color: white;" class="btn btn-md btn-secondary display-4" href="{{url_for('session.login')}}">Buy Luggage Space</a>
                 <a id="btn-help-hand" class="btn btn-md btn-white-outline display-4" href="{{url_for('session.login')}}">Helping Hand</a>
@@ -60,6 +62,7 @@
             </div>
         </div>
     </div>
+    
 
     <!-- How to steps -->
     <div class="container">
@@ -67,39 +70,59 @@
             
             <div class="card-deck d-flex justify-content-center">
               <div class="row">
-                  <div class="col text-center card-item">
+                  <div class="col text-center card-item" style="right: 10px">
                     <div class="card-test shadow p-3 mb-5 bg-white rounded" id="card-steps">
                       <div class="card-body">
                           <!-- <h1>1</h1> -->
+                          <h3 class="step d-flex align-items-center justify-content-center m-auto">
+                            1
+                        </h3>
+                        <br>
                         <h5 class="card-title">Registration</h5>
                         <p class="card-text">Fill up the necessary sign up details.</p>
                       </div>
                     </div>
                   </div>
-                  <div class="col text-center card-item">
+                  <div class="col text-center card-item" style="right: 10px">
                     <div class="card shadow p-3 mb-5 bg-white rounded" id="card-steps">   
                       <div class="card-body">
                           <!-- <h1>2</h1> -->
+                          <h3 class="step d-flex align-items-center justify-content-center m-auto">
+                            2
+                        </h3>
+                        <br>
                         <h5 class="card-title">Verification</h5>
                         <p class="card-text">Know Your Customer (KYC):<br>Users required to submit Identity card</p>
                       </div>
                     </div>
                   </div>
-                  <div class="col text-center card-item">
+                  <div class="col text-center card-item" style="right: 10px">
                     <div class="card shadow p-3 mb-5 bg-white rounded" id="card-steps">   
                       <div class="card-body">
                           <!-- <h1>3</h1> -->
+                          <h3 class="step d-flex align-items-center justify-content-center m-auto">
+                            3
+                        </h3>
+                        <br>
                         <h5 class="card-title">Marketplace</h5>
-                        <p class="card-text">Willing seller of excess space post in advance and willing buyer bid for the luggage space.Appoint a time to meet before check-in.</p>
+                        <p class="card-text">Seller of excess space post the space & willing buyer bid for the space.</p>
+                        
+                        <p style='font-size: 50%' class="card-text">Seller of excess space post the space & willing buyer bid for the space.</p>
                       </div>
                     </div>
                   </div>
-                  <div class="col text-center card-item">
+                  <div class="col text-center card-item" style="right: 10px">
                     <div class="card shadow p-3 mb-5 bg-white rounded" id="card-steps">   
                       <div class="card-body">
                           <!-- <h1>4</h1> -->
-                        <h5 class="card-title">Handover and Rating</h5>
-                        <p class="card-text">During handover, seller will check-in together with buyer and "share the luggage weight" with the buyer.*Try to avoid buyer's luggage under your passport name</p>
+                          <h3 class="step d-flex align-items-center justify-content-center m-auto">
+                            4
+                        </h3>
+                        <br>
+                        <h5 class="card-title">Handover and Rate</h5>
+                        <p class="card-text">Seller will check-in together with buyer and "share the luggage weight" with the buyer.</p>
+                        <p style="font-size: 50%" class="card-text">Note to seller: Ensure the luggage is not under your <name></name></p>
+
                       </div>
                     </div>
                   </div>
@@ -107,22 +130,108 @@
                 </div>
               </div>
     </div>
+                <!-- parallax -->
+              <div class="container-fluid" >
+                    <div class="parallax text-center">                    
+                        <div class="col-12 text-center vh-100 d-flex justify-content-center align-items-center flex-column">
+                              <h1 style='-webkit-text-fill-color: beige'>Our Goal</h1>
+                              <br>
+                              <div class="col-md-6">
+                                  <p style='font-size: 150%; -webkit-text-fill-color: beige'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio deserunt sed, eveniet quam id quidem ad harum eius suscipit delectus cupiditate quasi eum aliquam. Quasi voluptatum quam odio odit eligendi.</p>
 
-              <div class="container-fluid">
-                    <div class="parallax text-center">
-                        
-                        <div class="col-1"></div>
-                        <div class="col-5 text-center">
-                          <h1>Our Goal</h1>
-                          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                              </div>
+                              
                         </div>
                     </div>
                 </div>
+                <!-- sell bag -->
+                <br><br><br>
+                <div class="container-fluid" style="background-color: #efefef; padding-top: 75px; padding-bottom: 90px">
+                    <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="float-right" >
+                              <a href="http://chittagongit.com/icon/luggage-icon-png-16.html" title="Luggage Icon Png #294835"><img style="height:300px; padding-right: 10rem" src="http://chittagongit.com/images/luggage-icon-png/luggage-icon-png-16.jpg" /></a>
+                            </div>
+                          </div>
+                         <div class="col-md-6">
+                          <div class="align-left aside-content" style="width: 50%; align-content: center;">
+                            <h2>Dosbag luggage space</h2>
+                            <div class="mbr-section-text">
+                                <p class="mbr-text text1 pt-2 mbr-light mbr-fonts-style display-7">Malaysia Airline,&nbsp;<br>One-way 20kg checked baggage, from KUL to HK&nbsp;</p>
+                                <p class="mbr-text text2 pt-4 mbr-light mbr-fonts-style display-2"></p>
+                                <p style="font-size: 200%">$50&nbsp;<s>$476</s></p>
+                            </div>
+                            <!--Btn-->
+                            <div class="mbr-section-btn pt-3 align-left">
+                                <a href="{{url_for('session.login')}}" class="btn btn-warning" style="border-radius: 25%"> Buy Now</a>
+                            </div>
+                        </div>
+                         </div>
+                        </div>
+                    </div>
+                </div>
+                  <br><br>
+
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="google-map w-100 h-100 p-0" style="padding-right: 160px">
+                        <iframe class="w-100 h-100" frameborder="0" style="border:0" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15935.391352042388!2d101.6299415!3d3.134873!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1f08990385cee5b8!2sNEXT+Academy+-+The+Best+Coding+%26+Digital+Marketing+School+in+Southeast+Asia!5e0!3m2!1sen!2smy!4v1555643531555!5m2!1sen!2smy" allowfullscreen="true"></iframe>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <h2 class="pb-3 align-left">  Drop a line</h2>
+                    <div>
+                        <div class="icon-contacts pb-3">
+                            <h5 class="align-left mbr-fonts-style display-7">
+                                Ready for offers and cooperation
+                            </h5>
+                            <p class="mbr-text align-left mbr-fonts-style display-7">
+                                Phone: +1 (0) 356 3421 001 <br>
+                                Email: Dosbag_inquiry@gmail.com
+                            </p>
+                        </div>
+                    </div>
+                    <div data-form-type="formoid">
+                        <!---Formbuilder Form--->
+                        <form action="https://google.com/" method="POST" class="mbr-form form-with-styler" data-form-title="google Form"><input type="hidden" name="email" data-form-email="true" value="ndLVOzEJcN0a1y2oqz5oOiIULokgOyvGcvH9saHfnlWjzQm8s33wFLxXbR35Bc+s2dsnRmX/Cdw1yFWpn2wCaQ62a2oufJ/79hfO81p+5vwPJGEWFlSKBBtTHx5ZLKnh">
+                            <div class="row">
+                                <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out the form!</div>
+                                <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
+                                </div>
+                            </div>
+                            <div class="dragArea row">
+                                <div class="col-md-6  form-group" data-for="name">
+                                    <input type="text" name="name" placeholder="Your Name" data-form-field="Name" required="required" class="form-control input display-7" id="name-form4-6">
+                                </div>
+                                <div class="col-md-6  form-group" data-for="phone">
+                                    <input type="text" name="phone" placeholder="Phone" data-form-field="Phone" required="required" class="form-control input display-7" id="phone-form4-6">
+                                </div>
+                                <div data-for="email" class="col-md-12  form-group">
+                                    <input type="text" name="email" placeholder="Email" data-form-field="Email" class="form-control input display-7" required="required" id="email-form4-6">
+                                </div>
+                                <div data-for="message" class="col-md-12  form-group">
+                                    <textarea name="message" placeholder="Message" data-form-field="Message" class="form-control input display-7" id="message-form4-6"></textarea>
+                                </div>
+                                <div class="col-md-12 input-group-btn  mt-2 align-center">
+                                    <button type="submit" class="btn btn-primary btn-form display-4">SEND MESSAGE</button>
+                                </div>
+                            </div>
+                        </form><!---Formbuilder Form--->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
 </body>
 <script>
     function validateFC(){
       fc = document.getElementById('flight_code_input').value;
       if(fc && /[A-Z]{2}\d{3,4}/.test(fc)){
+          getLocation()
+      }
+      else if(fc && /[A-Z]{1}\d{4}/.test(fc)){
           getLocation()
       }
       else{
@@ -154,7 +263,7 @@
 </script>
 
 <br>
-<footer class="lead" style="text-align: center">Created by Dosbag.inc </footer>
+<footer class="lead text-white" style="text-align: center; background-color: black">Created by Dosbag.inc </footer>
 <br>
 
 

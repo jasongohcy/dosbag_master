@@ -33,20 +33,36 @@ def availability():
     flightcode = request.form.get('flightcode')
     time = request.form.get('time')
     date = request.form.get('date')
-    available = Seller.select().where((Seller.flightcode==flightcode) & (Seller.departure_date==date) & (Seller.departure_time==time) & (Seller.sold ==False) & (Seller.choice=='Luggage') & (Seller.seller_id!=current_user.id))
-    
     now = str(datetime.datetime.now())
     
-    d = re.search('\d+-\d+-\d+', now)
-    if d :
-        date = d.group(0)
-    
-    t = re.search('\d+:\d+:\d+', now)
-    if t :
-        time = t.group(0)
 
-    list_of_sellers = Seller.select().where((Seller.departure_date >= date) & (Seller.sold != True) & (Seller.choice=='Luggage') & (Seller.seller_id!=current_user.id))
-    # breakpoint()
+    if current_user.is_authenticated :
+
+        available = Seller.select().where((Seller.flightcode==flightcode) & (Seller.departure_date==date) & (Seller.departure_time==time) & (Seller.sold ==False) & (Seller.choice=='Luggage') & (Seller.seller_id!=current_user.id))
+        d = re.search('\d+-\d+-\d+', now)
+        if d :
+            date = d.group(0)
+        
+        t = re.search('\d+:\d+:\d+', now)
+        if t :
+            time = t.group(0)
+
+        list_of_sellers = Seller.select().where((Seller.departure_date >= date) & (Seller.sold != True) & (Seller.choice=='Luggage') & (Seller.seller_id!=current_user.id))
+
+    else : 
+
+        available = Seller.select().where((Seller.flightcode==flightcode) & (Seller.departure_date==date) & (Seller.departure_time==time) & (Seller.sold ==False) & (Seller.choice=='Luggage') )
+        d = re.search('\d+-\d+-\d+', now)
+        if d :
+            date = d.group(0)
+        
+        t = re.search('\d+:\d+:\d+', now)
+        if t :
+            time = t.group(0)
+
+        list_of_sellers = Seller.select().where((Seller.departure_date >= date) & (Seller.sold != True) & (Seller.choice=='Luggage') )
+    
+    
     return render_template('seller/marketplace.html', available=available,list_of_sellers=list_of_sellers)
 
 

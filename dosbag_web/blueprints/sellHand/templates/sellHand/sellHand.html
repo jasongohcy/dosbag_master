@@ -64,6 +64,9 @@
             if(fc && /[A-Z]{2}\d{3,4}/.test(fc)){
                 getLocation()
             }
+            else if(fc && /[A-Z]{1}\d{4}/.test(fc)){
+                getLocation()
+            }
             else{
                 alert("Invalid Flight Code!")
                 document.getElementById('flight_code_input').value=""
