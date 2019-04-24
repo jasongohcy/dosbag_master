@@ -43,7 +43,7 @@ def sellHand_show(fc):
         else:
             ranNum=ranNum    
         
-        return render_template('sellHand/sellHand_market.html', seller=seller_list[0],result=result[ranNum].id)     
+        return render_template('sellHand/sellHand_market.html', seller=seller_list[ranNum],result=result[ranNum].id)     
 
     else:
         return render_template('homepage2.html', noflight = "No Available Sellers")
