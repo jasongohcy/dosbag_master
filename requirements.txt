@@ -29,7 +29,7 @@ MarkupSafe==1.1.0
 peewee==3.8.2
 peewee-db-evolve==3.7.0
 pipenv==2018.11.26
-protobuf==3.7.1
+protobuf==3.15.0
 psycopg2-binary==2.7.7
 pycodestyle==2.5.0
 python-dateutil==2.8.0
